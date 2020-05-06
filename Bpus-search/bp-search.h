@@ -38,4 +38,4 @@ extern void val_copy(char val1[MAX_LEN], char val[MAX_LEN]);
 extern int key_cmp(char key1[KEY_MAX_LEN], char key[KEY_MAX_LEN]);
 extern struct BPTree *bptree_init();
 extern void bptree_search(struct BPTree *const tree);
-extern void use_bptree_search();
+extern void use_bptree_search(struct BPTree *const tree);

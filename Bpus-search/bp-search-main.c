@@ -24,7 +24,11 @@ struct BPTree
 
 extern void __print__bptree(struct BPTreeNode *root);
 
-void main()
+int main()
 {
-  use_bptree_search();
+  struct BPTree *tree = bptree_init();
+  use_bptree_search(tree);
+  bptree_destroy(tree);
+  printf("DONE");
+  return 0;
 }

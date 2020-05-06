@@ -343,25 +343,14 @@ struct BPTree *bptree_create(void)
 // 插入叶子节点
 int bptree_insert(struct BPTree *const tree, char key[KEY_MAX_LEN], struct PlaneInfo *value)
 {
-  char key1[KEY_MAX_LEN];
-  key_copy(key1, key);
-  PlaneInfo *value1 = (PlaneInfo *)malloc(sizeof(struct PlaneInfo));
-  val_copy(value1->plane_num, value->plane_num);
-  val_copy(value1->fly_num, value->fly_num);
-  val_copy(value1->setoff_time, value->setoff_time);
-  val_copy(value1->start_station, value->start_station);
-  val_copy(value1->terminal_station, value->terminal_station);
-  val_copy(value1->fly_duration, value->fly_duration);
-  value1->passenger_limit = value->passenger_limit;
-  value1->ticket_left = value->ticket_left;
   struct BPTreeNode *node = tree->root;
   // 遍历找到适合的叶子节点位置
   while (!node->is_leaf)
   {
-    node = node->entries[_bptree_node_find_pos(node, key1) - 1].child;
+    node = node->entries[_bptree_node_find_pos(node, key) - 1].child;
   }
   // 插入叶子节点
-  _bptree_leaf_node_insert(node, key1, value1);
+  _bptree_leaf_node_insert(node, key, value);
   // 如果节点的个数超过最大值FANOUT，就要进行分裂
   if (node->size == FANOUT + 1)
   {
@@ -500,6 +489,7 @@ void bptree_fill(struct BPTree *const tree)
     key_copy(key, key_cat(plane_info->fly_num, plane_info->setoff_time));
 
     bptree_insert(tree, key, plane_info);
+    free(plane_info);
   }
   fclose(fp);
 }
@@ -554,12 +544,12 @@ void bptree_search(struct BPTree *const tree)
   }
 }
 
-void use_bptree_search()
+void use_bptree_search(struct BPTree *const tree)
 {
-  struct BPTree *tree = bptree_init();
   int choice = 3;
+  int flag = 1;
 
-  while (1)
+  while (flag)
   {
     printf("\n   ****************************************\n\n");
     printf("     1. 根据航班号和起飞时间查询航班信息\n\n");
@@ -578,7 +568,8 @@ void use_bptree_search()
       __print__bptree(tree->root);
       break;
     case 3:
-      exit(0);
+      flag = 0;
+      break;
     }
   }
 }
