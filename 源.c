@@ -19,15 +19,15 @@
 
 #include    <errno.h>
 
-#define MAX_NAME_LEN 20//ĞÕÃû³¤¶È
+#define MAX_NAME_LEN 20//å§“åé•¿åº¦
 
 #define MAX_BKNAME_LEN 50
 
 #define	bookinfomationfile "bookinfo.dat"
 
-#define _CRT_SECURE_NO_WARNINGS£»
+#define _CRT_SECURE_NO_WARNINGSï¼›
 
-#define _CRT_SECURE_NO_DEPRECATE£»
+#define _CRT_SECURE_NO_DEPRECATEï¼›
 
 
 
@@ -36,13 +36,13 @@ typedef struct _btree_node_t
 
 {
 
-    int num;                      /*¹Ø¼ü×Ö¸öÊı*/
+    int num;                      /*å…³é”®å­—ä¸ªæ•°*/
 
-    int* key;                     /* ¹Ø¼ü×Ö£ºËùÕ¼¿Õ¼äÎª(max+1) - ¶à³öÀ´µÄ1¸ö¿Õ¼äÓÃÓÚ½»»»¿Õ¼äÊ¹ÓÃ */
+    int* key;                     /* å…³é”®å­—ï¼šæ‰€å ç©ºé—´ä¸º(max+1) - å¤šå‡ºæ¥çš„1ä¸ªç©ºé—´ç”¨äºäº¤æ¢ç©ºé—´ä½¿ç”¨ */
 
-    struct _btree_node_t** child;  /* ×Ó½áµã£ºËùÕ¼¿Õ¼äÎª£¨max+2£©- ¶à³öÀ´µÄ1¸ö¿Õ¼äÓÃÓÚ½»»»¿Õ¼äÊ¹ÓÃ */
+    struct _btree_node_t** child;  /* å­ç»“ç‚¹ï¼šæ‰€å ç©ºé—´ä¸ºï¼ˆmax+2ï¼‰- å¤šå‡ºæ¥çš„1ä¸ªç©ºé—´ç”¨äºäº¤æ¢ç©ºé—´ä½¿ç”¨ */
 
-    struct _btree_node_t* parent;  /* ¸¸½áµã */
+    struct _btree_node_t* parent;  /* çˆ¶ç»“ç‚¹ */
 
     struct PlaneNode** Plane;
 
@@ -50,47 +50,47 @@ typedef struct _btree_node_t
 
 typedef struct result {
 
-    btree_node_t* pt;				  //Ö¸ÏòÕÒµ½µÄ½áµã
+    btree_node_t* pt;				  //æŒ‡å‘æ‰¾åˆ°çš„ç»“ç‚¹
 
-    int i;					  //1<=i<=m,ÔÚ½áµãÖĞµÄ¹Ø¼ü×ÖÎ»Ğò
+    int i;					  //1<=i<=m,åœ¨ç»“ç‚¹ä¸­çš„å…³é”®å­—ä½åº
 
-    int tag;				  //1:²éÕÒ³É¹¦£¬0:²éÕÒÊ§°Ü
+    int tag;				  //1:æŸ¥æ‰¾æˆåŠŸï¼Œ0:æŸ¥æ‰¾å¤±è´¥
 
 }result;
 
 
 typedef struct PlaneNode {
 
-    int FTnumber;   //Â·¾¶ºÅ
+    int FTnumber;   //è·¯å¾„å·
 
-    char From[MAX_BKNAME_LEN];  //ÆğÊ¼µØµã
+    char From[MAX_BKNAME_LEN];  //èµ·å§‹åœ°ç‚¹
 
-    char To[MAX_NAME_LEN];      //ÖÕµã
+    char To[MAX_NAME_LEN];      //ç»ˆç‚¹
 
-    int FlightNumber;                    //º½°àºÅ
+    int FlightNumber;                    //èˆªç­å·
 
-    int CrewNumber;						//×Ü¿â´æ
+    int CrewNumber;						//æ€»åº“å­˜
 
-    int FlightDate;				//³ö°æÄê·İ
+    int FlightDate;				//å‡ºç‰ˆå¹´ä»½
 
-    char Planenumber[MAX_NAME_LEN];					//·É»úºÅ
+    char Planenumber[MAX_NAME_LEN];					//é£æœºå·
 
 
 
-}PlaneNode, * PlaneType;				//Í¼ÊéÀàĞÍ
+}PlaneNode, * PlaneType;				//å›¾ä¹¦ç±»å‹
 
 
 typedef struct
 
 {
 
-    int max;                /* µ¥¸ö½áµã×î´ó¹Ø¼ü×Ö¸öÊı - ½×m=max+1 */
+    int max;                /* å•ä¸ªç»“ç‚¹æœ€å¤§å…³é”®å­—ä¸ªæ•° - é˜¶m=max+1 */
 
-    int min;                /* µ¥¸ö½áµã×îĞ¡¹Ø¼ü×Ö¸öÊı min=£¨m/2£©ÏòÉÏÈ¡Õû-1*/
+    int min;                /* å•ä¸ªç»“ç‚¹æœ€å°å…³é”®å­—ä¸ªæ•° min=ï¼ˆm/2ï¼‰å‘ä¸Šå–æ•´-1*/
 
-    int sidx;               /* ·ÖÁÑË÷Òı = (max+1)/2 */
+    int sidx;               /* åˆ†è£‚ç´¢å¼• = (max+1)/2 */
 
-    btree_node_t* root;     /* BÊ÷¸ù½áµãµØÖ· */
+    btree_node_t* root;     /* Bæ ‘æ ¹ç»“ç‚¹åœ°å€ */
 
 }btree_t;
 
@@ -100,7 +100,7 @@ static int btree_merge(btree_t* btree, btree_node_t* node);
 
 static int _btree_merge(btree_t* btree, btree_node_t* left, btree_node_t* right, int mid);
 
-//½Úµã´´½¨
+//èŠ‚ç‚¹åˆ›å»º
 
 static btree_node_t* btree_creat_node(btree_t* btree)
 
@@ -120,11 +120,11 @@ static btree_node_t* btree_creat_node(btree_t* btree)
 
 
 
-    node->num = 0;  //½áµã¹Ø¼ü×Ö¸öÊı³õÊ¼»¯Îª0
+    node->num = 0;  //ç»“ç‚¹å…³é”®å­—ä¸ªæ•°åˆå§‹åŒ–ä¸º0
 
 
 
-    /* ÉêÇëmax+1¸ö¿Õ¼ä£¬µ±¹Ø¼ü×Ö¸öÊıµ½´ïmax+1Ê±Ö´ĞĞ·ÖÁÑ²Ù×÷ */
+    /* ç”³è¯·max+1ä¸ªç©ºé—´ï¼Œå½“å…³é”®å­—ä¸ªæ•°åˆ°è¾¾max+1æ—¶æ‰§è¡Œåˆ†è£‚æ“ä½œ */
 
     node->key = (int*)calloc(btree->max + 1, sizeof(int));
 
@@ -140,7 +140,7 @@ static btree_node_t* btree_creat_node(btree_t* btree)
 
 
 
-    /* ÉêÇëmax+2¸ö×Ó½Úµã¿Õ¼ä£¬ÒòÎª×Ó½ÚµãÃ¿·ÖÁÑÒ»´Î£¬¸¸½Úµã¶àÒ»¸ö¹Ø¼ü×Ö£¬ËùÒÔµ±¸¸½ÚµãĞèÒª·ÖÁÑÊ±£¬ÕıºÃÊÇ×Ó½Úµã¸öÊıÎªmax+2¸ö */
+    /* ç”³è¯·max+2ä¸ªå­èŠ‚ç‚¹ç©ºé—´ï¼Œå› ä¸ºå­èŠ‚ç‚¹æ¯åˆ†è£‚ä¸€æ¬¡ï¼Œçˆ¶èŠ‚ç‚¹å¤šä¸€ä¸ªå…³é”®å­—ï¼Œæ‰€ä»¥å½“çˆ¶èŠ‚ç‚¹éœ€è¦åˆ†è£‚æ—¶ï¼Œæ­£å¥½æ˜¯å­èŠ‚ç‚¹ä¸ªæ•°ä¸ºmax+2ä¸ª */
 
     node->child = (btree_node_t**)calloc(btree->max + 2, sizeof(btree_node_t*));
    
@@ -174,7 +174,7 @@ btree_t* btree_creat(int m)
 
 
 
-    if (m < 3) { //½×Êı²»ÄÜĞ¡ÓÚ3½× 
+    if (m < 3) { //é˜¶æ•°ä¸èƒ½å°äº3é˜¶ 
 
         fprintf(stderr, "[%s][%d] Parameter 'max' must geater than 2.\n", __FILE__, __LINE__);
 
@@ -206,9 +206,9 @@ btree_t* btree_creat(int m)
 
     }
 
-    btree->min--;  //min=£¨m/2£©ÏòÉÏÈ¡Õû-1
+    btree->min--;  //min=ï¼ˆm/2ï¼‰å‘ä¸Šå–æ•´-1
 
-    btree->sidx = m / 2;  //·ÖÁÑË÷Òı
+    btree->sidx = m / 2;  //åˆ†è£‚ç´¢å¼•
 
     btree->root = NULL;
 
@@ -220,7 +220,7 @@ btree_t* btree_creat(int m)
 
 
 
-//·ÖÁÑ½áµã
+//åˆ†è£‚ç»“ç‚¹
 
 static int btree_split(btree_t* btree, btree_node_t* node)
 
@@ -240,7 +240,7 @@ static int btree_split(btree_t* btree, btree_node_t* node)
 
 
 
-        newNode = btree_creat_node(btree);  //´´½¨Ò»¸öĞÂ½áµãÓÃÀ´·ÅË÷Òısidx+1¿ªÊ¼µÄ¹Ø¼ü×Ö
+        newNode = btree_creat_node(btree);  //åˆ›å»ºä¸€ä¸ªæ–°ç»“ç‚¹ç”¨æ¥æ”¾ç´¢å¼•sidx+1å¼€å§‹çš„å…³é”®å­—
 
         if (NULL == newNode) {
 
@@ -254,9 +254,9 @@ static int btree_split(btree_t* btree, btree_node_t* node)
 
 
 
-        memcpy(newNode->key, node->key + sidx + 1, (total - sidx - 1) * sizeof(int));  //°ÑsidxÖ®ºóµÄ¹Ø¼ü×Ö·ÅÈëĞÂ½áµãÖĞ
+        memcpy(newNode->key, node->key + sidx + 1, (total - sidx - 1) * sizeof(int));  //æŠŠsidxä¹‹åçš„å…³é”®å­—æ”¾å…¥æ–°ç»“ç‚¹ä¸­
 
-        memcpy(newNode->child, node->child + sidx + 1, (total - sidx) * sizeof(btree_node_t*));  //°Ñchild[sidx]Ö®ºóµÄ×Ó½áµã·Åµ½newNode->childÖĞ
+        memcpy(newNode->child, node->child + sidx + 1, (total - sidx) * sizeof(btree_node_t*));  //æŠŠchild[sidx]ä¹‹åçš„å­ç»“ç‚¹æ”¾åˆ°newNode->childä¸­
 
         memcpy(newNode->Plane, node->Plane + sidx + 1, (total - sidx - 1) * sizeof(PlaneNode*));
 
@@ -264,9 +264,9 @@ static int btree_split(btree_t* btree, btree_node_t* node)
 
 
 
-        newNode->num = (total - sidx - 1);  //¼ÆËãĞÂ½áµãµÄ¹Ø¼ü×Ö¸öÊı
+        newNode->num = (total - sidx - 1);  //è®¡ç®—æ–°ç»“ç‚¹çš„å…³é”®å­—ä¸ªæ•°
 
-        newNode->parent = node->parent;    //½«nodeºÍnewNode×÷ÎªÔ­node¸¸½ÚµãµÄ×Ó½áµã
+        newNode->parent = node->parent;    //å°†nodeå’ŒnewNodeä½œä¸ºåŸnodeçˆ¶èŠ‚ç‚¹çš„å­ç»“ç‚¹
 
 
 
@@ -276,11 +276,11 @@ static int btree_split(btree_t* btree, btree_node_t* node)
 
         parent = node->parent;
 
-        if (NULL == parent) {   //Èç¹ûnodeÃ»ÓĞ¸¸½Úµã      
+        if (NULL == parent) {   //å¦‚æœnodeæ²¡æœ‰çˆ¶èŠ‚ç‚¹      
 
 
 
-            parent = btree_creat_node(btree);  //ĞÂ½¨Ò»¸ö½áµã×÷Îª¸¸½Úµã
+            parent = btree_creat_node(btree);  //æ–°å»ºä¸€ä¸ªç»“ç‚¹ä½œä¸ºçˆ¶èŠ‚ç‚¹
 
             if (NULL == parent) {
 
@@ -292,9 +292,9 @@ static int btree_split(btree_t* btree, btree_node_t* node)
 
 
 
-            btree->root = parent;   //¸üĞÂ¸ù½áµã
+            btree->root = parent;   //æ›´æ–°æ ¹ç»“ç‚¹
 
-            //°Ñnode,newNode×÷ÎªĞÂ½¨¸¸½ÚµãµÄ×Ó½áµã
+            //æŠŠnode,newNodeä½œä¸ºæ–°å»ºçˆ¶èŠ‚ç‚¹çš„å­ç»“ç‚¹
 
             parent->child[0] = node;
 
@@ -306,7 +306,7 @@ static int btree_split(btree_t* btree, btree_node_t* node)
 
 
 
-            parent->key[0] = node->key[sidx];  //°Ñ·ÖÁÑË÷ÒıËùÔÚµÄ¹Ø¼ü×Ö·Åµ½¸Ã¸¸½ÚµãÖĞ
+            parent->key[0] = node->key[sidx];  //æŠŠåˆ†è£‚ç´¢å¼•æ‰€åœ¨çš„å…³é”®å­—æ”¾åˆ°è¯¥çˆ¶èŠ‚ç‚¹ä¸­
 
             parent->Plane[0] = node->Plane[sidx];
 
@@ -316,35 +316,35 @@ static int btree_split(btree_t* btree, btree_node_t* node)
 
         else {
 
-            //Èç¹ûnodeÔ­±¾¾ÍÓĞ¸¸½Úµã£¬¾ÍÖ±½Ó°Ñkey[sidx]²åÈëµ½¸¸½ÚµãÖĞ
+            //å¦‚æœnodeåŸæœ¬å°±æœ‰çˆ¶èŠ‚ç‚¹ï¼Œå°±ç›´æ¥æŠŠkey[sidx]æ’å…¥åˆ°çˆ¶èŠ‚ç‚¹ä¸­
 
-            for (idx = parent->num; idx > 0; idx--) {      //ÕÒµ½¸¸½ÚµãÖĞ±Èkey[sidx]´óµÄ×îĞ¡¹Ø¼ü×Ö£¬°Ñkey[sidx]²åµ½¸Ã¹Ø¼ü×ÖµÄÇ°Ãæ   
+            for (idx = parent->num; idx > 0; idx--) {      //æ‰¾åˆ°çˆ¶èŠ‚ç‚¹ä¸­æ¯”key[sidx]å¤§çš„æœ€å°å…³é”®å­—ï¼ŒæŠŠkey[sidx]æ’åˆ°è¯¥å…³é”®å­—çš„å‰é¢   
 
-                if (node->key[sidx] < parent->key[idx - 1]) {   //ÔÚparent->keyÖĞÃ¿´ÎÕÒµ½Ò»¸ö±Èkey[sidx]´óµÄ¾ÍÔÙ±È½ÏÇ°Ò»¸ö      
+                if (node->key[sidx] < parent->key[idx - 1]) {   //åœ¨parent->keyä¸­æ¯æ¬¡æ‰¾åˆ°ä¸€ä¸ªæ¯”key[sidx]å¤§çš„å°±å†æ¯”è¾ƒå‰ä¸€ä¸ª      
 
-                    parent->key[idx] = parent->key[idx - 1];  //Ã¿ÕÒµ½Ò»¸ö£¬¾Í°Ñ¸Ã¹Ø¼ü×ÖµÄÖµ£¬ºÍ¸Ã¹Ø¼ü×ÖÏÂ·½µÄÓÒº¢×Ó½áµãÏòºóÒÆÒ»Î»
+                    parent->key[idx] = parent->key[idx - 1];  //æ¯æ‰¾åˆ°ä¸€ä¸ªï¼Œå°±æŠŠè¯¥å…³é”®å­—çš„å€¼ï¼Œå’Œè¯¥å…³é”®å­—ä¸‹æ–¹çš„å³å­©å­ç»“ç‚¹å‘åç§»ä¸€ä½
 
                     parent->child[idx + 1] = parent->child[idx];
 
                     parent->Plane[idx] = parent->Plane[idx - 1];
 
-                    continue;  //¼ÌĞø½øĞĞforÑ­»·
+                    continue;  //ç»§ç»­è¿›è¡Œforå¾ªç¯
 
                 }
 
                 break;
 
-                //Ö±µ½ÕÒµ½±Èkey[sidx]´óµÄ×îĞ¡parent->keyË÷Òı£¬
+                //ç›´åˆ°æ‰¾åˆ°æ¯”key[sidx]å¤§çš„æœ€å°parent->keyç´¢å¼•ï¼Œ
 
-                //´ËÊ±µÄparent->key[idx]±íÊ¾node->key[sidx]Òª²åÈëµÄµØ·½,parent->child[idx+1]ÊÇnewNodeÒª²åÈëµÄµØ·½
+                //æ­¤æ—¶çš„parent->key[idx]è¡¨ç¤ºnode->key[sidx]è¦æ’å…¥çš„åœ°æ–¹,parent->child[idx+1]æ˜¯newNodeè¦æ’å…¥çš„åœ°æ–¹
 
             }
 
 
 
-            parent->key[idx] = node->key[sidx];  //²åÈë·ÖÁÑ¹Ø¼ü×Ö
+            parent->key[idx] = node->key[sidx];  //æ’å…¥åˆ†è£‚å…³é”®å­—
 
-            parent->child[idx + 1] = newNode;      //²åÈëĞÂ½áµã
+            parent->child[idx + 1] = newNode;      //æ’å…¥æ–°ç»“ç‚¹
 
             parent->Plane[idx] = node->Plane[sidx];
 
@@ -380,7 +380,7 @@ static int btree_split(btree_t* btree, btree_node_t* node)
 
         memset(node->Plane + sidx, 0, (total - sidx) * sizeof(PlaneNode*));
 
-        //½«¸´ÖÆ¸ønewNodeµÄ×Ó½áµãÖĞµÄparentÖ¸ÏònewNode
+        //å°†å¤åˆ¶ç»™newNodeçš„å­ç»“ç‚¹ä¸­çš„parentæŒ‡å‘newNode
 
         for (idx = 0; idx <= newNode->num; idx++) {
 
@@ -406,7 +406,7 @@ static int btree_split(btree_t* btree, btree_node_t* node)
 
 static int _btree_insert(btree_t* btree, btree_node_t* node, int key, int idx,PlaneNode*plane)
 
-//´«ÈëÒª²åÈë¹Ø¼ü×ÖµÄ½áµã£¬idx±íÊ¾±È×Ô¼º´óµÄ½áµãµÄÎ»ÖÃ£¬Ò²¾ÍÊÇkeyÒª²åÈëµÄÎ»ÖÃ
+//ä¼ å…¥è¦æ’å…¥å…³é”®å­—çš„ç»“ç‚¹ï¼Œidxè¡¨ç¤ºæ¯”è‡ªå·±å¤§çš„ç»“ç‚¹çš„ä½ç½®ï¼Œä¹Ÿå°±æ˜¯keyè¦æ’å…¥çš„ä½ç½®
 
 {
    
@@ -418,7 +418,7 @@ static int _btree_insert(btree_t* btree, btree_node_t* node, int key, int idx,Pl
 
     for (i = node->num; i > idx; i--) {
 
-        node->key[i] = node->key[i - 1];  //²åÈë¹Ø¼ü×Ö
+        node->key[i] = node->key[i - 1];  //æ’å…¥å…³é”®å­—
         node->Plane[i] = node->Plane[i - 1];
 
     }
@@ -432,7 +432,7 @@ static int _btree_insert(btree_t* btree, btree_node_t* node, int key, int idx,Pl
 
 
 
-    if (node->num > btree->max) {  //µ±¸Ã½áµã¹Ø¼ü×Ö¸öÊı´óÓÚ×î´ó¹Ø¼ü×Ö¸öÊıÊ±£¬Ö´ĞĞ·ÖÁÑ²Ù×÷
+    if (node->num > btree->max) {  //å½“è¯¥ç»“ç‚¹å…³é”®å­—ä¸ªæ•°å¤§äºæœ€å¤§å…³é”®å­—ä¸ªæ•°æ—¶ï¼Œæ‰§è¡Œåˆ†è£‚æ“ä½œ
 
         return btree_split(btree, node);
 
@@ -448,19 +448,19 @@ static int _btree_insert(btree_t* btree, btree_node_t* node, int key, int idx,Pl
 
 
 
-//²åÈë²Ù×÷
+//æ’å…¥æ“ä½œ
 
 int btree_insert(btree_t* btree, int key,PlaneNode* plane)
 
 {
 
-    int idx = 0;  //keyË÷Òı
+    int idx = 0;  //keyç´¢å¼•
 
     btree_node_t* node = btree->root;
 
 
 
-    if (NULL == node) {  //Èç¹ûÎª¿ÕÊ÷£¬¾Í´´½¨µÚÒ»¸ö½áµã
+    if (NULL == node) {  //å¦‚æœä¸ºç©ºæ ‘ï¼Œå°±åˆ›å»ºç¬¬ä¸€ä¸ªç»“ç‚¹
 
         node = btree_creat_node(btree);
 
@@ -472,7 +472,7 @@ int btree_insert(btree_t* btree, int key,PlaneNode* plane)
 
         }
 
-        //µÚÒ»¸ö½áµã´´½¨³É¹ûºó£¬²åÈëkey
+        //ç¬¬ä¸€ä¸ªç»“ç‚¹åˆ›å»ºæˆæœåï¼Œæ’å…¥key
 
         node->num = 1;
 
@@ -498,7 +498,7 @@ int btree_insert(btree_t* btree, int key,PlaneNode* plane)
 
         for (idx = 0; idx < node->num; idx++) {
 
-            if (key == node->key[idx]) {  //Èç¹ûÒª²åÈëµÄÊı¾İÒÑ¾­´æÔÚ¾Í²»ĞèÒª²åÈë
+            if (key == node->key[idx]) {  //å¦‚æœè¦æ’å…¥çš„æ•°æ®å·²ç»å­˜åœ¨å°±ä¸éœ€è¦æ’å…¥
 
                 fprintf(stderr, "[%s][%d] The node is exist!\n", __FILE__, __LINE__);
 
@@ -506,7 +506,7 @@ int btree_insert(btree_t* btree, int key,PlaneNode* plane)
 
             }
 
-            else if (key < node->key[idx]) {  //ÕÒµ½µÚÒ»¸ö±È×Ô¼º´óµÄ¹Ø¼ü×Ö,Ã»ÓĞµÄ»°¾Í¼ÌĞøidx++
+            else if (key < node->key[idx]) {  //æ‰¾åˆ°ç¬¬ä¸€ä¸ªæ¯”è‡ªå·±å¤§çš„å…³é”®å­—,æ²¡æœ‰çš„è¯å°±ç»§ç»­idx++
 
                 break;
 
@@ -514,13 +514,13 @@ int btree_insert(btree_t* btree, int key,PlaneNode* plane)
 
         }
 
-        //Èç¹û¸Ã½áµã´æÔÚ×Ó½áµã£¬´ËÊ±µÄidxÒ²±íÊ¾×Ó½áµãµÄË÷Òı
+        //å¦‚æœè¯¥ç»“ç‚¹å­˜åœ¨å­ç»“ç‚¹ï¼Œæ­¤æ—¶çš„idxä¹Ÿè¡¨ç¤ºå­ç»“ç‚¹çš„ç´¢å¼•
 
-        //×Ó½áµãË÷Òı´Ó0¿ªÊ¼
+        //å­ç»“ç‚¹ç´¢å¼•ä»0å¼€å§‹
 
         //child[idx]<key[idx]<child[idx+1]
 
-        if (NULL != node->child[idx]) {  //Èç¹ûÕâ¸ö¹Ø¼ü×ÖÓĞ¶ÔÓ¦µÄ×Ó½Úµã£¬¾Í½øÈëÕâ¸ö×Ó½Úµã£¬ÔÚÕâ¸ö×Ó½ÚµãÖĞÖ´ĞĞÉÏÊö²Ù×÷
+        if (NULL != node->child[idx]) {  //å¦‚æœè¿™ä¸ªå…³é”®å­—æœ‰å¯¹åº”çš„å­èŠ‚ç‚¹ï¼Œå°±è¿›å…¥è¿™ä¸ªå­èŠ‚ç‚¹ï¼Œåœ¨è¿™ä¸ªå­èŠ‚ç‚¹ä¸­æ‰§è¡Œä¸Šè¿°æ“ä½œ
 
             node = node->child[idx];
 
@@ -528,7 +528,7 @@ int btree_insert(btree_t* btree, int key,PlaneNode* plane)
 
         else {
             
-            break;  //Ö±µ½ÕÒµ½Ò»¸ö±È×Ô¼º´óµÄÇÒÃ»ÓĞ×Ó½áµãµÄ¹Ø¼ü×Ö£¬Ö´ĞĞ²åÈë²Ù×÷£¬²åµ½Õâ¸ö¹Ø¼ü×ÖµÄÇ°Ãæ
+            break;  //ç›´åˆ°æ‰¾åˆ°ä¸€ä¸ªæ¯”è‡ªå·±å¤§çš„ä¸”æ²¡æœ‰å­ç»“ç‚¹çš„å…³é”®å­—ï¼Œæ‰§è¡Œæ’å…¥æ“ä½œï¼Œæ’åˆ°è¿™ä¸ªå…³é”®å­—çš„å‰é¢
 
         }
 
@@ -538,7 +538,7 @@ int btree_insert(btree_t* btree, int key,PlaneNode* plane)
 
 
 
-    return _btree_insert(btree, node, key, idx,plane);  //Ö´ĞĞ²åÈë²Ù×÷
+    return _btree_insert(btree, node, key, idx,plane);  //æ‰§è¡Œæ’å…¥æ“ä½œ
    
 
 }
@@ -555,14 +555,14 @@ void search(btree_t* btree, int key)
     while (NULL != node) {
         for (idx = 0; idx < node->num; idx++) {
 
-            if (key == node->key[idx]) {  //Èç¹ûÒª²åÈëµÄÊı¾İÒÑ¾­´æÔÚ¾Í²»ĞèÒª²åÈë
+            if (key == node->key[idx]) {  //å¦‚æœè¦æ’å…¥çš„æ•°æ®å·²ç»å­˜åœ¨å°±ä¸éœ€è¦æ’å…¥
                 sign = 1;
 
                 B = node->Plane[idx];
 
-                printf("|**************************************º½°à»ù±¾ĞÅÏ¢********************************************|\n");
+                printf("|**************************************èˆªç­åŸºæœ¬ä¿¡æ¯********************************************|\n");
 
-                printf("|  FTºÅ  |      Ê¼·¢µØ        |     Ä¿µÄµØ    | º½°àºÅ | ³ËÔ±¶¨¶î |  ·ÉĞĞÊ±¼ä  |    ·É»úºÅ     |\n");
+                printf("|  FTå·  |      å§‹å‘åœ°        |     ç›®çš„åœ°    | èˆªç­å· | ä¹˜å‘˜å®šé¢ |  é£è¡Œæ—¶é—´  |    é£æœºå·     |\n");
 
 
                 printf("|--------|--------------------|---------------|--------|----------|------------|---------------|\n");
@@ -570,14 +570,14 @@ void search(btree_t* btree, int key)
                 printf("|  %-4d  |%-20s|%-15s|", B->FTnumber, B->From, B->To);
 
                 printf(" %-5d  |   %-4d   | %-6d   |%-15s|\n", B->FlightNumber, B->CrewNumber, B->FlightDate, B->Planenumber);
-                printf("²éÑ¯Íê³É£¬°´»Ø³µ¼ü¼ÌĞø²éÑ¯\n");
+                printf("æŸ¥è¯¢å®Œæˆï¼ŒæŒ‰å›è½¦é”®ç»§ç»­æŸ¥è¯¢\n");
                 getchar();
                 getchar();
                 break;
               
             }
 
-            else if (key < node->key[idx]) {  //ÕÒµ½µÚÒ»¸ö±È×Ô¼º´óµÄ¹Ø¼ü×Ö,Ã»ÓĞµÄ»°¾Í¼ÌĞøidx++
+            else if (key < node->key[idx]) {  //æ‰¾åˆ°ç¬¬ä¸€ä¸ªæ¯”è‡ªå·±å¤§çš„å…³é”®å­—,æ²¡æœ‰çš„è¯å°±ç»§ç»­idx++
 
                 break;
 
@@ -586,14 +586,14 @@ void search(btree_t* btree, int key)
         }
         
        
-        if (NULL != node->child[idx]) {  //Èç¹ûÕâ¸ö¹Ø¼ü×ÖÓĞ¶ÔÓ¦µÄ×Ó½Úµã£¬¾Í½øÈëÕâ¸ö×Ó½Úµã£¬ÔÚÕâ¸ö×Ó½ÚµãÖĞÖ´ĞĞÉÏÊö²Ù×÷
+        if (NULL != node->child[idx]) {  //å¦‚æœè¿™ä¸ªå…³é”®å­—æœ‰å¯¹åº”çš„å­èŠ‚ç‚¹ï¼Œå°±è¿›å…¥è¿™ä¸ªå­èŠ‚ç‚¹ï¼Œåœ¨è¿™ä¸ªå­èŠ‚ç‚¹ä¸­æ‰§è¡Œä¸Šè¿°æ“ä½œ
 
             node = node->child[idx];
 
         }
         else if (sign == 0) {
-            printf("...........................ÉĞÎŞ´Ëº½°à............................\n");
-            printf("²éÑ¯Íê³É£¬°´ÈÎÒâ¼ü¼ÌĞø²éÑ¯\n");
+            printf("...........................å°šæ— æ­¤èˆªç­............................\n");
+            printf("æŸ¥è¯¢å®Œæˆï¼ŒæŒ‰ä»»æ„é”®ç»§ç»­æŸ¥è¯¢\n");
             getchar();
             getchar();
             break;
@@ -981,105 +981,28 @@ int ToCode(char fchar[20])
 
     int fn = 0;
     
-    if (strcmp(fchar, "±±¾©") == 0)
+    if (strcmp(fchar, "åŒ—äº¬") == 0)
         fn = 10;
-    else if (strcmp(fchar, "ÉÏº£") == 0)
+    else if (strcmp(fchar, "ä¸Šæµ·") == 0)
         fn = 11;
-    else if (strcmp(fchar, "³É¶¼") == 0)
+    else if (strcmp(fchar, "æˆéƒ½") == 0)
         fn = 12;
-    else if (strcmp(fchar, "ÉîÛÚ") == 0)
+    else if (strcmp(fchar, "æ·±åœ³") == 0)
         fn = 13;
-    else if (strcmp(fchar, "ÏÃÃÅ") == 0)
+    else if (strcmp(fchar, "å¦é—¨") == 0)
         fn = 14;
-    else if (strcmp(fchar, "¶«¾©") == 0)
+    else if (strcmp(fchar, "ä¸œäº¬") == 0)
         fn = 20;
-    else if (strcmp(fchar, "´óÚæ") == 0)
+    else if (strcmp(fchar, "å¤§é˜ª") == 0)
         fn = 21;
-    else if (strcmp(fchar, "Ôı»Ï") == 0)
+    else if (strcmp(fchar, "æœ­å¹Œ") == 0)
         fn = 22;
-    else if (strcmp(fchar, "Å¦Ô¼") == 0)
+    else if (strcmp(fchar, "çº½çº¦") == 0)
         fn = 30;
-    else if (strcmp(fchar, "»ªÊ¢¶Ù") == 0)
+    else if (strcmp(fchar, "åç››é¡¿") == 0)
         fn = 31;
     else fn = -1;
 
     return fn;
 }
 
-int main() {
-
-    btree_t* bt;
-
-  
-
-    bt = btree_creat(4);
-
-    FILE* fp;
-
-    PlaneType B;
-
-    errno_t err;
-
-    //fopen_s(&fp, "bookinfo.dat", "r");
-
-    if ((err = fopen_s(&fp, "bookinfo.dat", "r")) != 0)
-
-    {
-
-        printf("²»ÄÜ´ò¿ªº½°àĞÅÏ¢ÎÄ¼ş,ÇëÈ·ÈÏ%sÎÄ¼şÒÑ·Åµ½ÅÌ¸ùÄ¿Â¼...", bookinfomationfile);
-
-        getchar();
-
-        return;
-
-    }
-    int ha = 0;
-   while (!feof(fp)&&ha<17)
-    {
-        B = (PlaneType)malloc(sizeof(PlaneNode));		// ÉêÇëº½°à¿Õ¼ä
-
-      fscanf(fp, "%d %s %s %d %d %d %s", &B->FTnumber, B->From, B->To, &B->FlightNumber,
-
-          &B->CrewNumber, &B->FlightDate, &B->Planenumber);// ¶ÁÈëº½°àÊı¾İ
-
-       printf("²åÈëº½°à%s", B->Planenumber);
-
-       btree_insert(bt, B->FTnumber,B);
-       
-        Inorder(bt->root, 0);
-
-        ++ha;
-
-    }
-
-    fclose(fp);
-
-    for (;;) {
-
-        printf("ÇëÊäÈëÊ¼·¢µØ£º\n");
-
-        char fchar[20];
-
-        char tchar[20];
-
-        int tn, fn ,num= 0;
-
-        scanf("%s", &fchar);
-
-        fn = ToCode(fchar);
-
-        printf("ÇëÊäÈëÄ¿µÄµØ£º\n");
-
-        scanf("%s", &tchar);
-
-        tn = ToCode(tchar);
-
-        num = 100 * fn + tn;
-
-        search(bt, num);
-         
-    }
-
-    return 0;
-
-}
