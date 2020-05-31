@@ -1,0 +1,34 @@
+int main()
+{
+    int choice;
+    int j=0;
+   	insert_customer();
+   	inithashtable();
+   	insert_hashtable();
+    while(true)
+    {
+        printf("\n1.查询客户信息\n");
+        printf("2.退出系统\n");
+        printf("请输入你要的操作:\n");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1 : search_cnumber();break;
+            case 2 : printf("谢谢使用!\n");break;
+            default : printf("输入错误，请重输:\n");
+        }
+        /*if(choice ==1)
+        {
+            search_cnumber();
+        }
+        else if(choice==2)
+        {
+            break;
+        }
+        else
+        {
+          printf("输入错误，请重输：\n");
+        }*/
+    }
+	return 0;
+}
