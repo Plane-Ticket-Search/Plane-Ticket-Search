@@ -1,0 +1,6 @@
+plane_num	fly_num	setoff_time3	start_station	trminal_station	fly_duration	100	12
+plane_num	fly_num	setoff_time2	start_station	trminal_station	fly_duration	100	34
+plane_num	fly_num	setoff_time1	start_station	trminal_station	fly_duration	100	23
+plane_num	fly_num	setoff_time5	start_station	trminal_station	fly_duration	100	65
+plane_num	fly_num	setoff_time9	start_station	trminal_station	fly_duration	100	12
+plane_num	fly_num	setoff_time6	start_station	trminal_station	fly_duration	100	87
