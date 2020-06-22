@@ -597,7 +597,6 @@ void insert_data(struct BPTree *const tree)
     // 添加数据
     printf("数据不存在，是否添加数据(y/n):");
     scanf("\n%c", &flag);
-    printf("flag:%c:flag\n", flag);
     if (flag == 'y')
     {
       printf("请输入飞机号：");
