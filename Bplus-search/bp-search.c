@@ -444,7 +444,7 @@ void bptree_fill(struct BPTree *const tree)
 {
   // 逐行读取文件
   // 每读一行添加一个叶子节点
-  FILE *fp = fopen("./Bplus-search/index.txt", "r");
+  FILE *fp = fopen("index.txt", "r");
   if (fp == NULL)
     return;
   char plane_num[MAX_LEN];
@@ -589,14 +589,15 @@ void insert_data(struct BPTree *const tree)
   key_copy(key, key_cat(plane_info->fly_num, plane_info->setoff_time));
   // 查询
   res = bptree_lookup(tree, key);
-  // 标志位，默认是不添加
-  char flag = 'n';
 
   if (res == NULL)
   {
+    // 标志位，默认是不添加
+    char flag = 'y';
     // 添加数据
     printf("数据不存在，是否添加数据(y/n):");
-    scanf("%c", &flag);
+    scanf("\n%c", &flag);
+    printf("flag:%c:flag\n", flag);
     if (flag == 'y')
     {
       printf("请输入飞机号：");
@@ -621,7 +622,7 @@ void insert_data(struct BPTree *const tree)
       bptree_insert(tree, key, plane_info);
       free(plane_info);
       // 向文件追加数据
-      FILE *fp = fopen("./Bplus-search/index.txt", "a");
+      FILE *fp = fopen("index.txt", "a");
       fprintf(fp, "%s\t%s\t%s\t%s\t%s\t%s\t%d\t%d\n", &plane_num, &fly_num,
               &setoff_time, &start_station, &terminal_station, &fly_duration, &passenger_limit, &ticket_left);
       fclose(fp);
@@ -681,3 +682,11 @@ void use_bptree_search(struct BPTree *const tree)
     }
   }
 }
+
+// int main()
+// {
+//   struct BPTree *tree = bptree_init();
+//   use_bptree_search(tree);
+//   bptree_destroy(tree);
+//   return 0;
+// }
