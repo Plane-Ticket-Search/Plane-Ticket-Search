@@ -1,4 +1,4 @@
-#include "bp-search.h"
+#include "./bp-search.h"
 
 #define DEBUG true
 #define debug_print(fmt, ...)            \
@@ -544,9 +544,113 @@ void bptree_search(struct BPTree *const tree)
   }
 }
 
+// 增加数据操作
+void insert_data(struct BPTree *const tree)
+{
+  /**
+   * 首先要求用户输入对应项
+   * 然后查询，如果有数据就预存对应节点询问用户是否修改数据
+   * 如果没有数据，就询问用户是否增加新的数据，如果是，就要求用户进一步输入
+   * */
+
+  // 数据初始化
+  char plane_num[MAX_LEN];
+  char fly_num[MAX_LEN];
+  char setoff_time[MAX_LEN];
+  char start_station[MAX_LEN];
+  char terminal_station[MAX_LEN];
+  char fly_duration[MAX_LEN];
+  char key[KEY_MAX_LEN];
+  int passenger_limit = 0;
+  int ticket_left = 0;
+  int i = 0;
+
+  PlaneInfo *res = NULL;
+
+  for (i = 0; i < MAX_LEN; i++)
+  {
+    plane_num[i] = '\0';
+    fly_num[i] = '\0';
+    setoff_time[i] = '\0';
+    start_station[i] = '\0';
+    terminal_station[i] = '\0';
+    fly_duration[i] = '\0';
+  }
+
+  printf("请输入航班号：");
+  scanf("%s", &fly_num);
+  printf("请输入起飞时间：");
+  scanf("%s", &setoff_time);
+  // 新建节点
+  PlaneInfo *plane_info = (PlaneInfo *)malloc(sizeof(struct PlaneInfo));
+  val_copy(plane_info->fly_num, fly_num);
+  val_copy(plane_info->setoff_time, setoff_time);
+  // 获取key值
+  key_copy(key, key_cat(plane_info->fly_num, plane_info->setoff_time));
+  // 查询
+  res = bptree_lookup(tree, key);
+  // 标志位，默认是不添加
+  char flag = 'n';
+
+  if (res == NULL)
+  {
+    // 添加数据
+    printf("数据不存在，是否添加数据(y/n):");
+    scanf("%c", &flag);
+    if (flag == 'y')
+    {
+      printf("请输入飞机号：");
+      scanf("%s", &plane_num);
+      printf("请输入起始站：");
+      scanf("%s", &start_station);
+      printf("请输入终点站：");
+      scanf("%s", &terminal_station);
+      printf("请输入预计飞行时间：");
+      scanf("%s", &fly_duration);
+      printf("请输入成员定额：");
+      scanf("%d", &passenger_limit);
+      printf("请输入票余量：");
+      scanf("%d", &ticket_left);
+
+      val_copy(plane_info->plane_num, plane_num);
+      val_copy(plane_info->start_station, start_station);
+      val_copy(plane_info->terminal_station, terminal_station);
+      val_copy(plane_info->fly_duration, fly_duration);
+      plane_info->passenger_limit = passenger_limit;
+      plane_info->ticket_left = ticket_left;
+      bptree_insert(tree, key, plane_info);
+      free(plane_info);
+      // 向文件追加数据
+      FILE *fp = fopen("./Bplus-search/index.txt", "a");
+      fprintf(fp, "%s\t%s\t%s\t%s\t%s\t%s\t%d\t%d\n", &plane_num, &fly_num,
+              &setoff_time, &start_station, &terminal_station, &fly_duration, &passenger_limit, &ticket_left);
+      fclose(fp);
+      printf("添加成功！\n");
+    }
+  }
+  else
+  {
+    // 修改数据
+    // printf("数据已存在:");
+    // printf("\n\n\t始发站                  终点站                  航班号          起飞时间             飞机号             飞行时间              成员定额       票余量\n");
+    // printf("    ----------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+    // printf("\t%s       |  %s       |  %s        |  %s     |  %s      |  %s         |  %d         |  %d\n",
+    //        &plane_info->start_station, &plane_info->terminal_station, &plane_info->fly_num, &plane_info->setoff_time, &plane_info->plane_num, &plane_info->fly_duration, plane_info->passenger_limit, plane_info->ticket_left);
+    // printf("    ----------------------------------------------------------------------------------------------------------------------------------------------------------\n\n");
+    // printf("是否修改(y/n):");
+    // scanf("%c", &flag);
+    // if (flag == 'y')
+    // {
+    //   /*确认修改*/
+
+    // }
+    printf("数据已存在!\n");
+  }
+}
+
 void use_bptree_search(struct BPTree *const tree)
 {
-  int choice = 3;
+  int choice = 4;
   int flag = 1;
 
   while (flag)
@@ -554,7 +658,8 @@ void use_bptree_search(struct BPTree *const tree)
     printf("\n   ****************************************\n\n");
     printf("     1. 根据航班号和起飞时间查询航班信息\n\n");
     printf("     2. 查看所有航班信息\n\n");
-    printf("     3. 退出航班索引功能\n");
+    printf("     3. 添加航班信息\n\n");
+    printf("     4. 退出航班索引功能\n");
     printf("\n   ****************************************\n\n");
     printf("     请选择您需要的服务： ");
     scanf("%d", &choice);
@@ -568,6 +673,9 @@ void use_bptree_search(struct BPTree *const tree)
       __print__bptree(tree->root);
       break;
     case 3:
+      insert_data(tree);
+      break;
+    case 4:
       flag = 0;
       break;
     }
