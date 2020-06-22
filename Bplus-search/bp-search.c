@@ -444,7 +444,7 @@ void bptree_fill(struct BPTree *const tree)
 {
   // 逐行读取文件
   // 每读一行添加一个叶子节点
-  FILE *fp = fopen("index.txt", "r");
+  FILE *fp = fopen("./Bplus-search/index.txt", "r");
   if (fp == NULL)
     return;
   char plane_num[MAX_LEN];
@@ -622,7 +622,7 @@ void insert_data(struct BPTree *const tree)
       bptree_insert(tree, key, plane_info);
       free(plane_info);
       // 向文件追加数据
-      FILE *fp = fopen("index.txt", "a");
+      FILE *fp = fopen("./Bplus-search/index.txt", "a");
       fprintf(fp, "%s\t%s\t%s\t%s\t%s\t%s\t%d\t%d\n", &plane_num, &fly_num,
               &setoff_time, &start_station, &terminal_station, &fly_duration, &passenger_limit, &ticket_left);
       fclose(fp);
