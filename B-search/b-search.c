@@ -143,7 +143,7 @@ static btree_node_t* btree_creat_node(btree_t* btree)
     /* 申请max+2个子节点空间，因为子节点每分裂一次，父节点多一个关键字，所以当父节点需要分裂时，正好是子节点个数为max+2个 */
 
     node->child = (btree_node_t**)calloc(btree->max + 2, sizeof(btree_node_t*));
-   
+
     if (NULL == node->child) {
 
         free(node->key);
@@ -174,7 +174,7 @@ btree_t* btree_creat(int m)
 
 
 
-    if (m < 3) { //阶数不能小于3阶 
+    if (m < 3) { //阶数不能小于3阶
 
         fprintf(stderr, "[%s][%d] Parameter 'max' must geater than 2.\n", __FILE__, __LINE__);
 
@@ -276,7 +276,7 @@ static int btree_split(btree_t* btree, btree_node_t* node)
 
         parent = node->parent;
 
-        if (NULL == parent) {   //如果node没有父节点      
+        if (NULL == parent) {   //如果node没有父节点
 
 
 
@@ -318,9 +318,9 @@ static int btree_split(btree_t* btree, btree_node_t* node)
 
             //如果node原本就有父节点，就直接把key[sidx]插入到父节点中
 
-            for (idx = parent->num; idx > 0; idx--) {      //找到父节点中比key[sidx]大的最小关键字，把key[sidx]插到该关键字的前面   
+            for (idx = parent->num; idx > 0; idx--) {      //找到父节点中比key[sidx]大的最小关键字，把key[sidx]插到该关键字的前面
 
-                if (node->key[sidx] < parent->key[idx - 1]) {   //在parent->key中每次找到一个比key[sidx]大的就再比较前一个      
+                if (node->key[sidx] < parent->key[idx - 1]) {   //在parent->key中每次找到一个比key[sidx]大的就再比较前一个
 
                     parent->key[idx] = parent->key[idx - 1];  //每找到一个，就把该关键字的值，和该关键字下方的右孩子结点向后移一位
 
@@ -356,23 +356,23 @@ static int btree_split(btree_t* btree, btree_node_t* node)
 
 
 
-        //  memset(node->key+sidx, 0, (total - sidx) * sizeof(int));  
+        //  memset(node->key+sidx, 0, (total - sidx) * sizeof(int));
 
-        //  memset(node->child+sidx+1, 0, (total - sidx) * sizeof(btree_node_t *));   
+        //  memset(node->child+sidx+1, 0, (total - sidx) * sizeof(btree_node_t *));
 
 
 
           /* Change node2's child->parent */
 
-        //  for(idx = 0; idx <= newNode->num; idx++) {  
+        //  for(idx = 0; idx <= newNode->num; idx++) {
 
-        //      if(NULL != newNode->child[idx]) {         
+        //      if(NULL != newNode->child[idx]) {
 
-        //          newNode->child[idx]->parent = newNode;  
+        //          newNode->child[idx]->parent = newNode;
 
-        //      }         
+        //      }
 
-        //  }    
+        //  }
 
         memset(node->key + sidx, 0, (total - sidx) * sizeof(int));
 
@@ -409,7 +409,7 @@ static int _btree_insert(btree_t* btree, btree_node_t* node, int key, int idx,Pl
 //传入要插入关键字的结点，idx表示比自己大的结点的位置，也就是key要插入的位置
 
 {
-   
+
     int i = 0;
 
 
@@ -527,7 +527,7 @@ int btree_insert(btree_t* btree, int key,PlaneNode* plane)
         }
 
         else {
-            
+
             break;  //直到找到一个比自己大的且没有子结点的关键字，执行插入操作，插到这个关键字的前面
 
         }
@@ -539,7 +539,7 @@ int btree_insert(btree_t* btree, int key,PlaneNode* plane)
 
 
     return _btree_insert(btree, node, key, idx,plane);  //执行插入操作
-   
+
 
 }
 
@@ -570,11 +570,9 @@ void search(btree_t* btree, int key)
                 printf("|  %-4d  |%-20s|%-15s|", B->FTnumber, B->From, B->To);
 
                 printf(" %-5d  |   %-4d   | %-6d   |%-15s|\n", B->FlightNumber, B->CrewNumber, B->FlightDate, B->Planenumber);
-                printf("查询完成，按回车键继续查询\n");
-                getchar();
-                getchar();
+
                 break;
-              
+
             }
 
             else if (key < node->key[idx]) {  //找到第一个比自己大的关键字,没有的话就继续idx++
@@ -582,10 +580,10 @@ void search(btree_t* btree, int key)
                 break;
 
             }
-            
+
         }
-        
-       
+
+
         if (NULL != node->child[idx]) {  //如果这个关键字有对应的子节点，就进入这个子节点，在这个子节点中执行上述操作
 
             node = node->child[idx];
@@ -593,9 +591,8 @@ void search(btree_t* btree, int key)
         }
         else if (sign == 0) {
             printf("...........................尚无此航班............................\n");
-            printf("查询完成，按任意键继续查询\n");
-            getchar();
-            getchar();
+            printf("查询完成\n");
+
             break;
         }
 
@@ -956,7 +953,7 @@ void Inorder(btree_node_t* root, int deep) {
                 for (k = 0; k < root->num; k++) {
 
                     printf("%d ", root->key[k]);
-                 
+
 
                 }
 
@@ -980,28 +977,32 @@ int ToCode(char fchar[20])
 {
 
     int fn = 0;
-    
-    if (strcmp(fchar, "北京") == 0)
+
+
+
+    if (strcmp(fchar, "Beijing") == 0)
         fn = 10;
-    else if (strcmp(fchar, "上海") == 0)
+    else if (strcmp(fchar, "Shanghai") == 0)
         fn = 11;
-    else if (strcmp(fchar, "成都") == 0)
+    else if (strcmp(fchar, "Chengdu") == 0)
         fn = 12;
-    else if (strcmp(fchar, "深圳") == 0)
+    else if (strcmp(fchar, "Shenzhen") == 0)
         fn = 13;
-    else if (strcmp(fchar, "厦门") == 0)
+    else if (strcmp(fchar, "Xiamen") == 0)
         fn = 14;
-    else if (strcmp(fchar, "东京") == 0)
+    else if (strcmp(fchar, "Tokyo") == 0)
         fn = 20;
-    else if (strcmp(fchar, "大阪") == 0)
+    else if (strcmp(fchar, "Osaka") == 0)
         fn = 21;
-    else if (strcmp(fchar, "札幌") == 0)
+    else if (strcmp(fchar, "Sapporo") == 0)
         fn = 22;
-    else if (strcmp(fchar, "纽约") == 0)
+    else if (strcmp(fchar, "Newyork") == 0)
         fn = 30;
-    else if (strcmp(fchar, "华盛顿") == 0)
+    else if (strcmp(fchar, "Washington") == 0)
         fn = 31;
     else fn = -1;
+
+
 
     return fn;
 }
