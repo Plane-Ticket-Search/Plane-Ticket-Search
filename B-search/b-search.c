@@ -1007,3 +1007,96 @@ int ToCode(char fchar[20])
     return fn;
 }
 
+int useBtreeSearch()
+{
+
+  btree_t *bt;
+
+  bt = btree_creat(4); //创建一个M为4的B树
+
+  FILE *fp;
+
+  PlaneType B;
+
+  errno_t err;
+
+  //fopen_s(&fp, "bookinfo.dat", "r");
+
+  if ((err = fopen_s(&fp, "./B-search/bookinfo.dat", "r")) != 0) //从dat文件读取航班信息
+
+  {
+
+    printf("不能打开航班信息文件,请确认%s文件已放到盘根目录...", bookinfomationfile);
+
+    getchar();
+
+    return 1;
+  }
+  int ha = 0;
+  while (!feof(fp) && ha < 17) //17是文件中航班信息的数量，写在这里停止循环防止最后一项乱码
+  {
+    B = (PlaneType)malloc(sizeof(PlaneNode)); // 申请航班空间
+
+    fscanf(fp, "%d %s %s %d %d %d %s", &B->FTnumber, B->From, B->To, &B->FlightNumber,
+
+           &B->CrewNumber, &B->FlightDate, &B->Planenumber); // 读入航班数据
+
+    printf("插入航班%s", B->Planenumber);
+
+    btree_insert(bt, B->FTnumber, B);
+
+    Inorder(bt->root, 0);
+
+    ++ha;
+  }
+
+  fclose(fp); //读取完成
+
+  for (;;)
+  {
+    int out=0;
+    printf("请输入始发地(首字母大写英文名)：\n");
+
+    char fchar[20];
+
+    char tchar[20];
+
+    int tn, fn, num = 0;
+
+    scanf("%s", &fchar);
+
+    fn = ToCode(fchar);
+
+    printf("请输入目的地(首字母大写英文名)：\n");
+
+    scanf("%s", &tchar);
+
+    tn = ToCode(tchar);
+
+
+    num = 100 * fn + tn;
+
+
+
+    search(bt, num);
+
+     printf("1.继续查询  2.退出查询：\n");
+
+     int choice;
+
+     scanf("%d", &choice);
+
+      switch (choice)
+      {
+    case 1:
+        break;
+    case 2:
+        out=1;
+        break;
+     }
+    if(out==1)
+        break;
+  } //这一部分是搜索的循环部分，ToCode函数把汉字转换为对应的数字，再通过数字拼接得到一个独一无二的标识码，用于搜索
+
+  return 0;
+}
