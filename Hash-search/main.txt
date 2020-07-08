@@ -30,5 +30,5 @@ int main()
           printf("输入错误，请重输：\n");
         }*/
     }
-	return 0;
+    return 0;
 }
