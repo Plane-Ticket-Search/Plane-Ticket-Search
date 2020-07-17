@@ -25,9 +25,9 @@
 
 #define	bookinfomationfile "bookinfo.dat"
 
-#define _CRT_SECURE_NO_WARNINGS；
+#define _CRT_SECURE_NO_WARNINGS
 
-#define _CRT_SECURE_NO_DEPRECATE；
+#define _CRT_SECURE_NO_DEPRECATE
 
 
 
@@ -1041,11 +1041,11 @@ int useBtreeSearch()
 
            &B->CrewNumber, &B->FlightDate, &B->Planenumber); // 读入航班数据
 
-    printf("插入航班%s", B->Planenumber);
+
 
     btree_insert(bt, B->FTnumber, B);
 
-    Inorder(bt->root, 0);
+
 
     ++ha;
   }
