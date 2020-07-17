@@ -1,10 +1,9 @@
 int main()
 {
-    int choice;
-    int j=0;
-   	insert_customer();
-   	inithashtable();
-   	insert_hashtable();
+    int choice = 0;
+    insert_customer();
+    inithashtable();
+    insert_hashtable();
     while(true)
     {
         printf("\n1.查询客户信息\n");
@@ -13,22 +12,12 @@ int main()
         scanf("%d",&choice);
         switch(choice)
         {
-            case 1 : search_cnumber();break;
-            case 2 : printf("谢谢使用!\n");break;
+            case 1 :  search_cnumber();
+		      break;
+            case 2 :  printf("谢谢使用!\n");
+		      exit(0);
             default : printf("输入错误，请重输:\n");
-        }
-        /*if(choice ==1)
-        {
-            search_cnumber();
-        }
-        else if(choice==2)
-        {
-            break;
-        }
-        else
-        {
-          printf("输入错误，请重输：\n");
-        }*/
+		      break;
     }
     return 0;
 }
