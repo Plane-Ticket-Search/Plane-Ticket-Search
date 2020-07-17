@@ -1,4 +1,4 @@
-#include <stdio.h>
+ï»¿#include <stdio.h>
 #include <memory.h>
 #include <string.h>
 #include <stdlib.h>
@@ -8,7 +8,7 @@
 
 #define P 50
 #define SIZE 50 
-//¶¨Òå¹şÏ£º¯ÊıµÄ³ıÊıºÍ¹şÏ£±í³¤
+//å®šä¹‰å“ˆå¸Œå‡½æ•°çš„é™¤æ•°å’Œå“ˆå¸Œè¡¨é•¿
 
 void ReadFlightIn(int cnn, int hsk);
 void inithashtable(void);
@@ -21,25 +21,25 @@ typedef struct customer
 {
     char cname[30];
 } CL;
-//¶¨Òå¿Í»§ĞÕÃûÓë¶ÔÓ¦µÄ±àºÅ
+//å®šä¹‰å®¢æˆ·å§“åä¸å¯¹åº”çš„ç¼–å·
 
 CL clist[50];
-//¶¨Òå¿Í»§ĞÅÏ¢±í³¤
+//å®šä¹‰å®¢æˆ·ä¿¡æ¯è¡¨é•¿
 int cn = 0;
-//¶¨Òå¿Í»§ÊıÁ¿
+//å®šä¹‰å®¢æˆ·æ•°é‡
 
 typedef struct reserve_customer
 {
     char cname[10];
     int level;
 } RC;
-//¶¨Òåº½°àĞÅÏ¢ÖĞµÄÔ¤¶¨¿Í»§
+//å®šä¹‰èˆªç­ä¿¡æ¯ä¸­çš„é¢„å®šå®¢æˆ·
 
 typedef struct houbu_customer
 {
     char cname[10];
 } HC;
-//¶¨Òåº½°àĞÅÏ¢ÖĞºò²¹¿Í»§
+//å®šä¹‰èˆªç­ä¿¡æ¯ä¸­å€™è¡¥å®¢æˆ·
 
 typedef struct HashNode_Struct
 {
@@ -55,14 +55,14 @@ typedef struct HashNode_Struct
     int rcnumber;
     int hcnumber;
 } HNS;
-//¶¨Òåº½°àĞÅÏ¢½á¹¹
+//å®šä¹‰èˆªç­ä¿¡æ¯ç»“æ„
 
 typedef struct Hash_struct
 {
-    int flag;       //ÅĞ¶ÏÊÇ·ñÎª¿Õ
-    HNS value[30];  //³Ë¿ÍËùÓĞµÄº½°àĞÅÏ¢
-    int fnum;       //³Ë¿ÍµÄº½°àĞÅÏ¢×ÜÊı
-    char cname[30]; //³Ë¿ÍÃû£¬ÔÚ²éÕÒµÄÊ±ºò¹şÏ£ÖµÏàÍ¬µÄÇé¿öÏÂÅĞ¶ÏÊÇ·ñÎªÕâ¸ö³Ë¿Í
+    int flag;       //åˆ¤æ–­æ˜¯å¦ä¸ºç©º
+    HNS value[30];  //ä¹˜å®¢æ‰€æœ‰çš„èˆªç­ä¿¡æ¯
+    int fnum;       //ä¹˜å®¢çš„èˆªç­ä¿¡æ¯æ€»æ•°
+    char cname[30]; //ä¹˜å®¢åï¼Œåœ¨æŸ¥æ‰¾çš„æ—¶å€™å“ˆå¸Œå€¼ç›¸åŒçš„æƒ…å†µä¸‹åˆ¤æ–­æ˜¯å¦ä¸ºè¿™ä¸ªä¹˜å®¢
 } HS;
 
 HS hashtable[SIZE];
@@ -71,13 +71,13 @@ void ReadFlightIn(int cnn, int hsk)
 {
     FILE *fp;
     char fname[20];
-    //º½°àĞÅÏ¢ÎÄ¼ş
+    //èˆªç­ä¿¡æ¯æ–‡ä»¶
     FILE *fp2;
     char fname2[20];
-    //¶©Æ±¿Í»§ÎÄ¼ş
+    //è®¢ç¥¨å®¢æˆ·æ–‡ä»¶
     FILE *fp3;
     char fname3[20];
-    //ºò²¹¿Í»§ÎÄ¼ş
+    //å€™è¡¥å®¢æˆ·æ–‡ä»¶
     int rcnumber = 0;
     int hcnumber = 0;
 
@@ -97,13 +97,13 @@ void ReadFlightIn(int cnn, int hsk)
         fp2 = fopen(fname2, "rt");
 
         while (fscanf(fp2, "%s    %d", hashtable[hsk].value[fnum].rclist[rcnumber].cname,
-                      &hashtable[hsk].value[fnum].rclist[rcnumber].level) != EOF) //¶ÁÈ¡º½°àĞÅÏ¢ÎÄ¼ş
+                      &hashtable[hsk].value[fnum].rclist[rcnumber].level) != EOF) //è¯»å–èˆªç­ä¿¡æ¯æ–‡ä»¶
         {
             rcnumber++;
         }
         hashtable[hsk].value[fnum].rcnumber = rcnumber;
         fclose(fp2);
-        //¶ÁÈ¡¶©Æ±¿Í»§ÎÄ¼ş
+        //è¯»å–è®¢ç¥¨å®¢æˆ·æ–‡ä»¶
 
         sprintf(fname3, "./Hash-search/%sHC.txt", hashtable[hsk].value[fnum].fly_num);
         fp3 = fopen(fname3, "rt");
@@ -114,7 +114,7 @@ void ReadFlightIn(int cnn, int hsk)
         }
         hashtable[hsk].value[fnum].hcnumber = hcnumber;
         fclose(fp3);
-        //¶ÁÈ¡ºò²¹¿Í»§ÎÄ¼ş
+        //è¯»å–å€™è¡¥å®¢æˆ·æ–‡ä»¶
         fnum++;
     }
     hashtable[hsk].fnum = fnum;
@@ -129,9 +129,9 @@ void inithashtable(void)
         hashtable[i].flag = 0;
     }
 }
-//³õÊ¼»¯¹şÏ£±í
+//åˆå§‹åŒ–å“ˆå¸Œè¡¨
 
-void insert_hashtable(void) //¼ÆËã¹şÏ£Öµ²¢²åÈë¹şÏ£±íÖĞÈ¥
+void insert_hashtable(void) //è®¡ç®—å“ˆå¸Œå€¼å¹¶æ’å…¥å“ˆå¸Œè¡¨ä¸­å»
 {
     int cnn;
     int hasaka;
@@ -170,7 +170,7 @@ void insert_hashtable(void) //¼ÆËã¹şÏ£Öµ²¢²åÈë¹şÏ£±íÖĞÈ¥
     }
 }
 
-void print_customer_information(int fnum, int has) //´òÓ¡¿Í»§ĞÅÏ¢
+void print_customer_information(int fnum, int has) //æ‰“å°å®¢æˆ·ä¿¡æ¯
 {
     int i;
     int y;
@@ -180,7 +180,7 @@ void print_customer_information(int fnum, int has) //´òÓ¡¿Í»§ĞÅÏ¢
     i = 0;
     for (; i < fnum; i++)
     {
-        printf("\n³ö·¢µØ\tÄ¿µÄµØ\tº½°àºÅ\t·ÉĞĞÊ±¼ä\t³ÉÔ±¶¨¶î\tÓàÆ±Á¿\tÔ¤¶¨³Ë¿ÍÈËÊı\tºò²¹ÈËÊı");
+        printf("\nå‡ºå‘åœ°\tç›®çš„åœ°\tèˆªç­å·\té£è¡Œæ—¶é—´\tæˆå‘˜å®šé¢\tä½™ç¥¨é‡\té¢„å®šä¹˜å®¢äººæ•°\tå€™è¡¥äººæ•°");
         printf("\n%s\t%s\t%s\t%s\t\t%s\t\t%s\t%d\t\t%d", hashtable[has].value[i].star_station,
                hashtable[has].value[i].trminal_station,
                hashtable[has].value[i].fly_num,
@@ -189,13 +189,13 @@ void print_customer_information(int fnum, int has) //´òÓ¡¿Í»§ĞÅÏ¢
                hashtable[has].value[i].yupiao,
                hashtable[has].value[i].rcnumber,
                hashtable[has].value[i].hcnumber);
-        printf("\n³Ë¿ÍÃû\t³Ë¿ÍµÈ¼¶");
+        printf("\nä¹˜å®¢å\tä¹˜å®¢ç­‰çº§");
         for (y = 0; y < hashtable[has].value[i].rcnumber; y++)
         {
             printf("\n%s\t%d", hashtable[has].value[i].rclist[y].cname,
                    hashtable[has].value[i].rclist[y].level);
         }
-        printf("\nºò²¹³Ë¿ÍÃû");
+        printf("\nåéƒ¨ä¹˜å®¢å§“å");
         for (k = 0; k < hashtable[has].value[i].hcnumber; k++)
         {
             printf("\n%s", hashtable[has].value[i].hclist[k].cname);
@@ -208,10 +208,10 @@ void search_cnumber(void)
     char name[30];
     int flag = 0;
     int HK;
-    int xhc;    //Ñ­»·´ËÊ±
-    int zh = 0; //Öµ
-    int cdd;    //×Ö·û´®³¤¶È
-    printf("ÇëÊäÈëÄãËùÒªÕÒµÄ¿Í»§ĞÕÃû£º\n");
+    int xhc;    //å¾ªç¯æ­¤æ—¶
+    int zh = 0; //å€¼
+    int cdd;    //å­—ç¬¦ä¸²é•¿åº¦
+    printf("è¯·è¾“å…¥ä½ è¦æ‰¾çš„å®¢æˆ·å§“åï¼š\n");
     scanf("%s", name);
 
     cdd = strlen(name);
@@ -219,7 +219,7 @@ void search_cnumber(void)
     {
         zh = name[xhc] + zh;
     }
-    zh = abs(zh); //Í¨¹ı¼ÆËã×Ö·û´®ÖµÀ´½øĞĞ¹şÏ£Öµ¼ÆËã
+    zh = abs(zh); //é€šè¿‡è®¡ç®—å­—ç¬¦ä¸²å€¼æ¥è¿›è¡Œå“ˆå¸Œå€¼è®¡ç®—
     HK = zh % P;
     if (strcmp(name, hashtable[HK].cname) == 0)
     {
@@ -240,10 +240,10 @@ void search_cnumber(void)
     }
     if (flag == 0)
     {
-        printf("¿Í»§ĞÅÏ¢²»´æÔÚ");
+        printf("å®¢æˆ·ä¿¡æ¯ä¸å­˜åœ¨");
     }
 }
-//²éÕÒ¿Í»§ĞÅÏ¢
+//æŸ¥æ‰¾å®¢æˆ·ä¿¡æ¯
 
 void insert_customer(void)
 {
@@ -254,5 +254,5 @@ void insert_customer(void)
         cn++;
     }
     fclose(fp);
-    //¶ÁÈ¡¿Í»§ĞÅÏ¢±í
+    //è¯»å–å®¢æˆ·ä¿¡æ¯è¡¨
 }
