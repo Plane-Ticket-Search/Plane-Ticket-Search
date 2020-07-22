@@ -500,9 +500,7 @@ int btree_insert(btree_t* btree, int key,PlaneNode* plane)
 
             if (key == node->key[idx]) {  //如果要插入的数据已经存在就不需要插入
 
-                fprintf(stderr, "[%s][%d] The node is exist!\n", __FILE__, __LINE__);
-
-                return 0;
+               break;
 
             }
 
@@ -571,7 +569,7 @@ void search(btree_t* btree, int key)
 
                 printf(" %-5d  |   %-4d   | %-6d   |%-15s|\n", B->FlightNumber, B->CrewNumber, B->FlightDate, B->Planenumber);
 
-                break;
+
 
             }
 
@@ -1010,9 +1008,23 @@ int ToCode(char fchar[20])
 int useBtreeSearch()
 {
 
-  btree_t *bt;
 
-  bt = btree_creat(4); //创建一个M为4的B树
+
+  int choice1=0;
+
+printf("请选择功能：1查询 2.插入");
+
+  scanf("%d",&choice1);
+
+  switch(choice1)
+
+  {
+  case 1:
+
+      {
+          btree_t *bt;
+
+  bt = btree_creat(10); //创建一个M为4的B树
 
   FILE *fp;
 
@@ -1033,7 +1045,7 @@ int useBtreeSearch()
     return 1;
   }
   int ha = 0;
-  while (!feof(fp) && ha < 17) //17是文件中航班信息的数量，写在这里停止循环防止最后一项乱码
+  while (!feof(fp) ) //17是文件中航班信息的数量，写在这里停止循环防止最后一项乱码
   {
     B = (PlaneType)malloc(sizeof(PlaneNode)); // 申请航班空间
 
@@ -1051,9 +1063,9 @@ int useBtreeSearch()
   }
 
   fclose(fp); //读取完成
-
-  for (;;)
+          for (;;)
   {
+
     int out=0;
     printf("请输入始发地(首字母大写英文名)：\n");
 
@@ -1097,6 +1109,121 @@ int useBtreeSearch()
     if(out==1)
         break;
   } //这一部分是搜索的循环部分，ToCode函数把汉字转换为对应的数字，再通过数字拼接得到一个独一无二的标识码，用于搜索
+      }break;
+
+     case 2:
+        {
+
+
+	FILE* fp = NULL; // 文件指针
+
+     char ftn[20],fp1[20],dp[20],fn[20],ct[20],fd[20],pn[20];
+
+    printf("请输入始发地：");
+
+    scanf("%s",&fp1);
+
+    printf("请输入目的地：");
+
+    scanf("%s",&dp);
+
+    printf("请输入航班号：");
+
+    scanf("%s",&fn);
+
+     printf("请输入机载人数：");
+
+    scanf("%s",&ct);
+
+     printf("请输入飞行时间：");
+
+    scanf("%s",&fd);
+
+     printf("请输入飞机编号：");
+
+    scanf("%s",&pn);
+
+	int tn1,fn1,num1;
+	fn1 = ToCode(fp1);
+	tn1 = ToCode(dp);
+	num1=100*fn1+tn1;
+
+
+
+    printf("%d",num1);
+	char szAppendStr[50];
+
+	sprintf(szAppendStr, "%d      %s       %s         %s        %s        %s        %s",num1,fp1,dp,fn,ct,fd,pn);
+
+
+
+	errno_t eResult;
+
+
+
+	// 以附加方式打开可读/写的文件, 如果没有此文件则会进行创建，然后以附加方式打开可读/写的文件
+
+	eResult = fopen_s(&fp, "./B-search/bookinfo.dat", "a+");
+
+
+
+	// 打开文件失败
+
+	if (eResult != 0)
+
+		exit(-1);
+
+
+
+	// 将追加内容写入文件指针当前的位置
+
+	fputs(szAppendStr, fp);
+
+
+
+	// 最后不要忘了,关闭打开的文件~~~
+
+	fclose(fp);
+
+	return 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ }break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  }
+
+
 
   return 0;
 }
