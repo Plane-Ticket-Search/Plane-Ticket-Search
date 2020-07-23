@@ -1153,7 +1153,7 @@ printf("请选择功能：1查询 2.插入");
     printf("%d",num1);
 	char szAppendStr[50];
 
-	sprintf(szAppendStr, "%d      %s       %s         %s        %s        %s        %s",num1,fp1,dp,fn,ct,fd,pn);
+	sprintf(szAppendStr, "%d             %s            %s             %s            %s              %s            %s   \n",num1,fp1,dp,fn,ct,fd,pn);
 
 
 
@@ -1186,20 +1186,6 @@ printf("请选择功能：1查询 2.插入");
 	fclose(fp);
 
 	return 0;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
  }break;
