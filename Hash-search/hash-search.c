@@ -6,18 +6,6 @@
 #include <ctype.h>
 #include <stdbool.h>
 
-/*
-首先需要四个类型的txt文件，分别是customer.txt(这个是总的客户名单）
-客户名.txt（这个是每个客户的航班信息，以客户的姓名作为名字）
-航班号HC.txt（这个是每个航班的候补客户名单，以航班号+HC作为名字）
-航班号RC.txt（这个是每个航班的客户名单，以航班号+RC作为名字）
-在main函数里要初始化客户表、哈希表、航班信息如下既写入insert_customer();
-inithashtable();
-insert_hashtable();语句，全都是void不用加任何东西
-查询功能通过search_cnumber();即可实现，全都是void不用加任何东西
-四种txt文件的内容另外说明 
-*/
-
 //定义哈希函数的除数
 #define P 50
 //定义哈希表长
@@ -44,14 +32,14 @@ int cn = 0;//定义客户数量
 //定义航班信息中的预定客户
 typedef struct reserve_customer
 {
-    char cname[10];
-    int level;
+    char cname[10]; //订票客户姓名
+    int level; //客票等级
 } RC;
 
 //定义航班信息中候补客户
 typedef struct houbu_customer
 {
-    char cname[10];
+    char cname[10]; //候补客户姓名
 } HC;
 
 //定义航班信息结构
@@ -95,7 +83,7 @@ void ReadFlightIn(int cnn, int hsk)
    
     int rcnumber = 0;
     int hcnumber = 0;
-    int fnum = 0; //标识特定乘客的航班信息数(0-29)
+    int fnum = 0; 
 
     //读取（cnn，hsk）这个乘客的航班信息
     sprintf(fname, "./Hash-search/%s.txt", clist[cnn].cname);
@@ -325,7 +313,7 @@ void search_cnumber(void)
         print_customer_information(hashtable[HK].fnum, HK);
         flag = 1;
     }
-    else//冲突时继续线性探测
+    else //冲突时继续线性探测
     {
         for (; HK < SIZE; HK++)
         {
@@ -354,9 +342,6 @@ void insert_customer(void)
     }
     fclose(fp);  
 }
-
-
-
 /*
 int main()
 {
