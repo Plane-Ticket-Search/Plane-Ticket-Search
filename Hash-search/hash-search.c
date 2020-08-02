@@ -157,7 +157,7 @@ void WriteFlightIn(int cnn, int hsk)
     if (fp != NULL)
     {
         printf("请输入航班客户姓名: \n");
-        scnaf("%s", cname);
+        scanf("%s", cname);
         fprintf(fp, "%s", cname);
         fclose(fp);
 
@@ -194,7 +194,7 @@ void WriteFlightIn(int cnn, int hsk)
             {
                 printf("请输入候补客户姓名\n");
                 scanf("%s", cname3);
-                fprintf(fname3, "./Hash-search/%sHC.txt", fly_num);
+                sprintf(fname3, "./Hash-search/%sHC.txt", fly_num);
                 fp3 = fopen(fname3, "w");
                 fprintf(fp3, "%s", cname3);
                 fclose(fp3);   
