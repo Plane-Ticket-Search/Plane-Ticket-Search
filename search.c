@@ -1,33 +1,16 @@
 #include "search.h"
 
-int useHashSearch()
+void useHashSearch()
 {
-  int choice;
-  int j = 0;
   insert_customer();
   inithashtable();
   insert_hashtable();
-  while (1)
-  {
-    printf("\n1.查询客户信息\n");
-    printf("2.退出系统\n");
-    printf("请输入你要的操作:\n");
-    scanf("%d", &choice);
 
-    if (choice == 1)
-    {
-      search_customer();
-    }
-    else if (choice == 2)
-    {
-      break;
-    }
-    else
-    {
-      printf("输入错误，请重输：\n");
-    }
+  while (true)
+  {
+    menu();
+    keydown();
   }
-  return 0;
 }
 
 int useBPtreeSearch()
