@@ -16,7 +16,7 @@ int useHashSearch()
 
     if (choice == 1)
     {
-      search_cnumber();
+      search_customer();
     }
     else if (choice == 2)
     {
