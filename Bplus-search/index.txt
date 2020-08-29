@@ -1,6 +1,9 @@
-plane_num	fly_num	setoff_time3	start_station	trminal_station	fly_duration	100	12
-plane_num	fly_num	setoff_time2	start_station	trminal_station	fly_duration	100	34
-plane_num	fly_num	setoff_time1	start_station	trminal_station	fly_duration	100	23
-plane_num	fly_num	setoff_time5	start_station	trminal_station	fly_duration	100	65
-plane_num	fly_num	setoff_time9	start_station	trminal_station	fly_duration	100	12
-plane_num	fly_num	setoff_time6	start_station	trminal_station	fly_duration	100	87
+uestc001	2020819001	1211	chengdu	beijing	5	100	100
+uestc002	2020819002	1212	chengdu	beijing	5	100	100
+uestc003	2020819003	1213	chengdu	beijing	5	100	100
+uestc004	2020819004	1214	chengdu	beijing	5	100	100
+uestc005	2020819005	1215	chengdu	beijing	5	100	100
+uestc006	2020819006	1216	chengdu	beijing	5	100	100
+uestc007	2020819007	1217	chengdu	beijing	5	100	100
+uestc008	2020819008	1218	chengdu	beijing	5	100	100
+uestc009	2020819009	1219	chengdu	beijing	5	100	100
