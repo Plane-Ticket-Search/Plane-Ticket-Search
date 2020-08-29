@@ -616,9 +616,6 @@ void insert_data(struct BPTree *const tree)
       scanf("%d", &passenger_limit);
       printf("请输入票余量：");
       scanf("%d", &ticket_left);
-
-      printf("%d,%d", passenger_limit, ticket_left);
-
       val_copy(plane_info->plane_num, plane_num);
       val_copy(plane_info->start_station, start_station);
       val_copy(plane_info->terminal_station, terminal_station);
