@@ -35,7 +35,8 @@ typedef struct BPTreeEntry
   // 节点唯一标识值
   // 可以用来判断节点在树中的位置
   char key[KEY_MAX_LEN];
-  union {
+  union
+  {
     struct BPTreeNode *child;
     struct PlaneInfo *value;
   };
@@ -380,9 +381,16 @@ struct PlaneInfo *bptree_lookup(struct BPTree *const tree, char key[KEY_MAX_LEN]
     //    	printf("bptree_lookup_end\n");
     if (index == 0 && key_cmp(node->entries[index].key, key1) != 0)
     {
+      printf("???");
       return NULL;
     }
+    printf("\n%s\t", node->entries[index].key);
+    printf("%s\n", key1);
     return node->entries[index].value;
+  }
+  else
+  {
+    return NULL;
   }
 }
 
@@ -612,6 +620,8 @@ void insert_data(struct BPTree *const tree)
       printf("请输入票余量：");
       scanf("%d", &ticket_left);
 
+      printf("%d,%d", passenger_limit, ticket_left);
+
       val_copy(plane_info->plane_num, plane_num);
       val_copy(plane_info->start_station, start_station);
       val_copy(plane_info->terminal_station, terminal_station);
@@ -623,7 +633,7 @@ void insert_data(struct BPTree *const tree)
       // 向文件追加数据
       FILE *fp = fopen("./Bplus-search/index.txt", "a");
       fprintf(fp, "%s\t%s\t%s\t%s\t%s\t%s\t%d\t%d\n", &plane_num, &fly_num,
-              &setoff_time, &start_station, &terminal_station, &fly_duration, &passenger_limit, &ticket_left);
+              &setoff_time, &start_station, &terminal_station, &fly_duration, passenger_limit, ticket_left);
       fclose(fp);
       printf("添加成功！\n");
     }
@@ -634,8 +644,6 @@ void insert_data(struct BPTree *const tree)
     // printf("数据已存在:");
     // printf("\n\n\t始发站                  终点站                  航班号          起飞时间             飞机号             飞行时间              成员定额       票余量\n");
     // printf("    ----------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-    // printf("\t%s       |  %s       |  %s        |  %s     |  %s      |  %s         |  %d         |  %d\n",
-    //        &plane_info->start_station, &plane_info->terminal_station, &plane_info->fly_num, &plane_info->setoff_time, &plane_info->plane_num, &plane_info->fly_duration, plane_info->passenger_limit, plane_info->ticket_left);
     // printf("    ----------------------------------------------------------------------------------------------------------------------------------------------------------\n\n");
     // printf("是否修改(y/n):");
     // scanf("%c", &flag);
