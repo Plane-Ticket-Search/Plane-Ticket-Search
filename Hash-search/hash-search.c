@@ -19,7 +19,7 @@ void search_customer(void);
 void insert_customer(void); 
 void WriteFlightIn(void);
 void menu(void);
-void keydown(void);
+int keydown(void);
 
 //定义客户姓名与对应的编号
 typedef struct customer
@@ -87,7 +87,7 @@ void ReadFlightIn(int cnn, int hsk)
     int fnum = 0; //标识特定乘客的航班信息数(0-29)
 
     //读取（cnn，hsk）这个乘客的航班信息
-    sprintf(fname, "./Hash-search/%s.txt", clist[cnn].cname);
+    sprintf(fname, "%s.txt", clist[cnn].cname);
     fp = fopen(fname, "r");
     while (fscanf(fp, "%s\t%s\t%s\t%s\t%s\t%s", hashtable[hsk].value[fnum].star_station,
                   hashtable[hsk].value[fnum].trminal_station, hashtable[hsk].value[fnum].fly_num,
@@ -99,7 +99,7 @@ void ReadFlightIn(int cnn, int hsk)
         hcnumber = 0;
 
         //读取订票客户文件
-        sprintf(fname2, "./Hash-search/%sBC.txt", hashtable[hsk].value[fnum].fly_num);
+        sprintf(fname2, "%sBC.txt", hashtable[hsk].value[fnum].fly_num);
         fp2 = fopen(fname2, "r");
         while (fscanf(fp2, "%s\t%d", hashtable[hsk].value[fnum].bclist[bcnumber].cname,
                       &hashtable[hsk].value[fnum].bclist[bcnumber].level) != EOF) //读取航班信息文件
@@ -110,7 +110,7 @@ void ReadFlightIn(int cnn, int hsk)
         fclose(fp2);
         
         //读取候补客户文件
-        sprintf(fname3, "./Hash-search/%sHC.txt", hashtable[hsk].value[fnum].fly_num);
+        sprintf(fname3, "%sHC.txt", hashtable[hsk].value[fnum].fly_num);
         fp3 = fopen(fname3, "r");
         while (fscanf(fp3, "%s", hashtable[hsk].value[fnum].hclist[hcnumber].cname) != EOF)
         {
@@ -157,7 +157,7 @@ void WriteFlightIn(void)
 
     if(cn <= SIZE)
     {
-        fp = fopen("./Hash-search/customer.txt", "a+");
+        fp = fopen("customer.txt", "a+");
         //memset(cname, 0, sizeof(cname));
         printf("请输入客户姓名: \n");
         scanf("%s", cname);
@@ -173,7 +173,7 @@ void WriteFlightIn(void)
             printf("请输入出发站\t终点站\t航班号\t飞行时间\t成员定额\t余票量\n");
             //fflush(stdin);
             scanf("%s\t%s\t%s\t%s\t%s\t%s", star_station, trminal_station, fly_num, fly_duration, chengyuandinge, yupiao);
-            sprintf(fname1, "./Hash-search/%s.txt", cname);
+            sprintf(fname1, " %s.txt", cname);
             fp1 = fopen(fname1, "a");
             fprintf(fp1, "%s\t%s\t%s\t%s\t%s\t%s\n", star_station,trminal_station, 
                     fly_num, fly_duration, chengyuandinge,yupiao);
@@ -188,7 +188,7 @@ void WriteFlightIn(void)
             {
                 printf("请输入订票客户姓名,客票等级\n");
                 scanf("%s\t%d", cname2, &level);
-                sprintf(fname2, "./Hash-search/%sBC.txt", fly_num);
+                sprintf(fname2, " %sBC.txt", fly_num);
                 fp2 = fopen(fname2, "a");
                 fprintf(fp2, "\n%s\t%d", cname2, level);      
                 fclose(fp2);   
@@ -202,7 +202,7 @@ void WriteFlightIn(void)
             {
                 printf("请输入候补客户姓名\n");
                 scanf("%s", cname3);
-                sprintf(fname3, "./Hash-search/%sHC.txt", fly_num);
+                sprintf(fname3, " %sHC.txt", fly_num);
                 fp3 = fopen(fname3, "a");
                 fprintf(fp3, "\n%s", cname3);
                 fclose(fp3);   
@@ -285,18 +285,22 @@ void print_customer_information(int fnum, int has) //fnum为乘客航班信息�
                hashtable[has].value[i].yupiao,
                hashtable[has].value[i].bcnumber,
                hashtable[has].value[i].hcnumber);
-        printf("\n乘客名\t乘客等级");
+        printf("\n");
+        printf("\n订票客户信息:\n");
+        printf("乘客名\t乘客等级");
         for (y = 0; y < hashtable[has].value[i].bcnumber; y++)
         {
             printf("\n%s\t%d", hashtable[has].value[i].bclist[y].cname,
                    hashtable[has].value[i].bclist[y].level);
         }
-        printf("\n候补乘客姓名");
+        printf("\n");
+        printf("\n候补乘客姓名:");
         for (k = 0; k < hashtable[has].value[i].hcnumber; k++)
         {
             printf("\n%s", hashtable[has].value[i].hclist[k].cname);
         }
     }
+    printf("\n");
 }
 
 //查找客户信息
@@ -348,10 +352,9 @@ void search_customer(void)
 void insert_customer(void)
 {
     FILE *fp;
-    fp = fopen("./Hash-search/customer.txt", "r");
+    fp = fopen("customer.txt", "r");
     while (fscanf(fp, "%s", clist[cn].cname) != EOF)
     {
-		
 		cn++;
     }
     fclose(fp);     
@@ -364,9 +367,10 @@ void menu()
     printf("3.退出系统\n");
     printf("--【请选择】--\n");  
 }
-void keydown()
+int keydown()
 {
     int choice =0;
+    int flag = 1;
     scanf("%d",&choice);
     switch(choice)
     {
@@ -381,10 +385,13 @@ void keydown()
         case 3: printf("谢谢使用!\n");
                      //system("pause");
                      //system("cls");
-                exit(0);
+                flag = 0;
+                break;
+                //exit(0);
         default:printf("输入错误，请重输:\n");
                 break;
         }
+    return flag;
 }
 
 /*
@@ -394,10 +401,11 @@ int main()
    	inithashtable();
    	insert_hashtable();
 
-    while (true)
+    int flag = 1;
+    while (flag != 0)
     {
         menu();
-        keydown();
+        flag = keydown();
     }
     return 0;
 }
