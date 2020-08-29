@@ -1117,7 +1117,9 @@ printf("请选择功能：1查询 2.插入");
 
 	FILE* fp = NULL; // 文件指针
 
-     char ftn[20],fp1[20],dp[20],fn[20],ct[20],fd[20],pn[20];
+     char ftn[20],fp1[20],dp[20],fn[20],ct[20],pn[20];
+
+     int fd;
 
     printf("请输入始发地：");
 
@@ -1137,7 +1139,7 @@ printf("请选择功能：1查询 2.插入");
 
      printf("请输入飞行时间：");
 
-    scanf("%s",&fd);
+    scanf("%d",&fd);
 
      printf("请输入飞机编号：");
 
@@ -1151,9 +1153,9 @@ printf("请选择功能：1查询 2.插入");
 
 
     printf("%d",num1);
-	char szAppendStr[50];
+	char szAppendStr[100];
 
-	sprintf(szAppendStr, "%d      %s       %s         %s        %s        %s        %s",num1,fp1,dp,fn,ct,fd,pn);
+	sprintf(szAppendStr, "%d      %s       %s         %s        %s        %d        %s\n",num1,fp1,dp,fn,ct,fd,pn);
 
 
 
