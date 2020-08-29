@@ -381,11 +381,8 @@ struct PlaneInfo *bptree_lookup(struct BPTree *const tree, char key[KEY_MAX_LEN]
     //    	printf("bptree_lookup_end\n");
     if (index == 0 && key_cmp(node->entries[index].key, key1) != 0)
     {
-      printf("???");
       return NULL;
     }
-    printf("\n%s\t", node->entries[index].key);
-    printf("%s\n", key1);
     return node->entries[index].value;
   }
   else
