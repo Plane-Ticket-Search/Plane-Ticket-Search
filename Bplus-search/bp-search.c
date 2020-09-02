@@ -130,7 +130,7 @@ int key_cmp(char key1[KEY_MAX_LEN], char key[KEY_MAX_LEN])
 // 输出节点的key
 void __print_node(struct BPTreeNode *node)
 {
-  printf("\n\n\t始发站                  终点站                  航班号          起飞时间             飞机号             飞行时间              成员定额       票余量\n");
+  printf("\n\n\t始发站           终点站             航班号             起飞时间             飞机号          飞行时间       成员定额       票余量\n");
   printf("    ----------------------------------------------------------------------------------------------------------------------------------------------------------\n");
   // 如果node为叶子节点就将i赋值为0，否则赋值为1
   int i = node->is_leaf ? 0 : 1;
@@ -256,13 +256,11 @@ static int _bptree_leaf_node_insert(struct BPTreeNode *node, char key[KEY_MAX_LE
 static int _bptree_internal_node_insert(struct BPTreeNode *node, char key[KEY_MAX_LEN],
                                         struct BPTreeNode *child)
 {
-  printf(" _bptree_internal_node_insert_start\n");
   char key1[KEY_MAX_LEN];
   key_copy(key1, key);
   BPTreeEntry *entry = (BPTreeEntry *)malloc(sizeof(struct BPTreeEntry));
   key_copy(entry->key, key1);
   entry->child = child;
-  printf(" _bptree_internal_node_insert_end\n");
   return _bptree_node_insert(node, entry);
 }
 
@@ -281,7 +279,6 @@ static void _bptree_update_child_parent(struct BPTreeNode *const node)
 static int _bptree_split(struct BPTree *const tree, struct BPTreeNode *node)
 {
   // 分配左右两边的节点个数
-  printf("_bptree_split_start\n");
   int left_size = node->size / 2;
   int right_size = node->size - left_size;
   struct BPTreeNode *right_node = (struct BPTreeNode *)
@@ -293,10 +290,14 @@ static int _bptree_split(struct BPTree *const tree, struct BPTreeNode *node)
   right_node->size = right_size;
   right_node->parent = node->parent;
   right_node->is_leaf = node->is_leaf;
+  char blank[MAX_LEN];
+  for (int i = 0; i < MAX_LEN; i++)
+  {
+    blank[i] = '\0';
+  }
 
-  char *pivot;
+  char pivot[MAX_LEN];
   key_copy(pivot, right_node->entries[0].key);
-  printf("pivot: %s\n", pivot);
 
   if (node->parent)
   {
@@ -308,7 +309,7 @@ static int _bptree_split(struct BPTree *const tree, struct BPTreeNode *node)
     struct BPTreeNode *parent = (struct BPTreeNode *)
         calloc(1, sizeof(struct BPTreeNode));
     BPTreeEntry nullentry;
-    key_copy(nullentry.key, '\0');
+    key_copy(nullentry.key, blank);
     nullentry.child = node;
     parent->entries[0] = nullentry;
     parent->size = 1;
@@ -327,7 +328,6 @@ static int _bptree_split(struct BPTree *const tree, struct BPTreeNode *node)
     _bptree_split(tree, parent);
     parent = parent->parent;
   }
-  printf("_bptree_split_end\n");
   return 0;
 }
 
