@@ -380,7 +380,7 @@ void search_customer(void)
 void insert_customer(void)
 {
     FILE *fp;
-    fp = fopen("customer.txt", "r");
+    fp = fopen("./Hash-search/customer.txt", "r");
     int i = 0;
     int k;
 	    while (fscanf(fp, "%s", clist[i].cname) != EOF)
@@ -430,7 +430,6 @@ int keydown()
         }
     return flag;
 }
-
 /*
 int main()
 {
