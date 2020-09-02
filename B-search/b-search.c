@@ -67,11 +67,11 @@ typedef struct PlaneNode {
 
     char To[MAX_NAME_LEN];      //终点
 
-    int FlightNumber;                    //航班号
+    char FlightNumber[MAX_NAME_LEN];                    //航班号
 
-    int CrewNumber;						//总库存
+    char CrewNumber[MAX_NAME_LEN];						//总库存
 
-    int FlightDate;				//出版年份
+    char FlightDate[MAX_NAME_LEN];				//出版年份
 
     char Planenumber[MAX_NAME_LEN];					//飞机号
 
@@ -558,16 +558,16 @@ void search(btree_t* btree, int key)
 
                 B = node->Plane[idx];
 
-                printf("|**************************************航班基本信息********************************************|\n");
+                printf("|*************************************************航班基本信息*************************************************|\n");
 
-                printf("|  FT号  |      始发地        |     目的地    | 航班号 | 乘员定额 |  飞行时间  |    飞机号     |\n");
+                printf("|  FT号  |      始发地        |     目的地    |     航班号    |   乘员定额    |   飞行时间    |    飞机号     |\n");
 
 
-                printf("|--------|--------------------|---------------|--------|----------|------------|---------------|\n");
+                printf("|--------|--------------------|---------------|---------------|---------------|---------------|---------------|\n");
 
                 printf("|  %-4d  |%-20s|%-15s|", B->FTnumber, B->From, B->To);
 
-                printf(" %-5d  |   %-4d   | %-6d   |%-15s|\n", B->FlightNumber, B->CrewNumber, B->FlightDate, B->Planenumber);
+                printf("%-15s|%-15s|%-15s|%-15s|\n", B->FlightNumber, B->CrewNumber, B->FlightDate, B->Planenumber);
 
 
 
@@ -988,16 +988,33 @@ int ToCode(char fchar[20])
         fn = 13;
     else if (strcmp(fchar, "Xiamen") == 0)
         fn = 14;
+    else if (strcmp(fchar, "Xian") == 0)
+        fn = 15;
+    else if (strcmp(fchar, "Guangzhou") == 0)
+        fn = 16;
+    else if (strcmp(fchar, "Chongqing") == 0)
+        fn = 17;
+    else if (strcmp(fchar, "Tianjin") == 0)
+        fn = 18;
+    else if (strcmp(fchar, "Taibei") == 0)
+        fn = 19;
     else if (strcmp(fchar, "Tokyo") == 0)
         fn = 20;
     else if (strcmp(fchar, "Osaka") == 0)
         fn = 21;
+    else if (strcmp(fchar, "Yokohama") == 0)
+        fn = 23;
     else if (strcmp(fchar, "Sapporo") == 0)
         fn = 22;
+    else if (strcmp(fchar, "Nagoya") == 0)
+        fn = 24;
+    else if (strcmp(fchar, "Kobe") == 0)
+        fn = 25;
     else if (strcmp(fchar, "Newyork") == 0)
         fn = 30;
     else if (strcmp(fchar, "Washington") == 0)
         fn = 31;
+
     else fn = -1;
 
 
@@ -1024,7 +1041,7 @@ printf("请选择功能：1查询 2.插入");
       {
           btree_t *bt;
 
-  bt = btree_creat(10); //创建一个M为4的B树
+  bt = btree_creat(500); //创建一个M为100的B树
 
   FILE *fp;
 
@@ -1049,7 +1066,7 @@ printf("请选择功能：1查询 2.插入");
   {
     B = (PlaneType)malloc(sizeof(PlaneNode)); // 申请航班空间
 
-    fscanf(fp, "%d %s %s %d %d %d %s", &B->FTnumber, B->From, B->To, &B->FlightNumber,
+    fscanf(fp, "%d %s %s %s %s %s %s", &B->FTnumber, B->From, B->To, &B->FlightNumber,
 
            &B->CrewNumber, &B->FlightDate, &B->Planenumber); // 读入航班数据
 
