@@ -423,7 +423,7 @@ int keydown()
                      //system("pause");
                      //system("cls");
                 flag = 0;
-                break;
+                return;
                 //exit(0);
         default:printf("输入错误，请重输:\n");
                 break;
