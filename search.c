@@ -5,11 +5,11 @@ void useHashSearch()
   insert_customer();
   inithashtable();
   insert_hashtable();
-
-  while (true)
+  int flag = 1;
+  while (flag)
   {
     menu();
-    keydown();
+    flag = keydown();
   }
 }
 
