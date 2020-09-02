@@ -9,7 +9,7 @@
 //定义哈希函数的除数
 #define P 91
 //定义哈希表长
-#define SIZE 200 
+#define SIZE 400 
 
 void ReadFlightIn(int cnn, int hsk); 
 void inithashtable(void); 
@@ -254,9 +254,10 @@ void insert_hashtable(void)
     int zhi;
     cnn = 0;
     zhi = 0;
+    int i = 1;
     for (; cnn < cn; cnn++)
     {
-      
+        i = 1;
 		changdu = strlen(clist[cnn].cname); //计算字符串的长度,strlen的返回值为(int)cname的长度
 		for (xhcs = 0; xhcs < changdu; xhcs++) 
         {
@@ -275,8 +276,9 @@ void insert_hashtable(void)
         //利用开放地址法（的线性探查法）解决哈希冲突
         else
         {
-            for (; hasaka < SIZE; hasaka++)
+            for (; hasaka < SIZE; hasaka = hasaka + i*i)
             {
+                i++;
 				if (hashtable[hasaka].flag == 0)
                 {
 					ReadFlightIn(cnn, hasaka);
