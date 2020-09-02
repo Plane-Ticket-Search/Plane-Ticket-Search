@@ -67,11 +67,11 @@ typedef struct PlaneNode {
 
     char To[MAX_NAME_LEN];      //终点
 
-    int FlightNumber;                    //航班号
+    char FlightNumber[MAX_NAME_LEN];                    //航班号
 
-    int CrewNumber;						//总库存
+    char CrewNumber[MAX_NAME_LEN];						//总库存
 
-    int FlightDate;				//出版年份
+    char FlightDate[MAX_NAME_LEN];				//出版年份
 
     char Planenumber[MAX_NAME_LEN];					//飞机号
 
@@ -558,16 +558,16 @@ void search(btree_t* btree, int key)
 
                 B = node->Plane[idx];
 
-                printf("|**************************************航班基本信息********************************************|\n");
+                printf("|*************************************************航班基本信息*************************************************|\n");
 
-                printf("|  FT号  |      始发地        |     目的地    | 航班号 | 乘员定额 |  飞行时间  |    飞机号     |\n");
+                printf("|  FT号  |      始发地        |     目的地    |     航班号    |   乘员定额    |   飞行时间    |    飞机号     |\n");
 
 
-                printf("|--------|--------------------|---------------|--------|----------|------------|---------------|\n");
+                printf("|--------|--------------------|---------------|---------------|---------------|---------------|---------------|\n");
 
                 printf("|  %-4d  |%-20s|%-15s|", B->FTnumber, B->From, B->To);
 
-                printf(" %-5d  |   %-4d   | %-6d   |%-15s|\n", B->FlightNumber, B->CrewNumber, B->FlightDate, B->Planenumber);
+                printf("%-15s|%-15s|%-15s|%-15s|\n", B->FlightNumber, B->CrewNumber, B->FlightDate, B->Planenumber);
 
 
 
@@ -1041,7 +1041,7 @@ printf("请选择功能：1查询 2.插入");
       {
           btree_t *bt;
 
-  bt = btree_creat(100); //创建一个M为100的B树
+  bt = btree_creat(500); //创建一个M为100的B树
 
   FILE *fp;
 
@@ -1066,7 +1066,7 @@ printf("请选择功能：1查询 2.插入");
   {
     B = (PlaneType)malloc(sizeof(PlaneNode)); // 申请航班空间
 
-    fscanf(fp, "%d %s %s %d %d %d %s", &B->FTnumber, B->From, B->To, &B->FlightNumber,
+    fscanf(fp, "%d %s %s %s %s %s %s", &B->FTnumber, B->From, B->To, &B->FlightNumber,
 
            &B->CrewNumber, &B->FlightDate, &B->Planenumber); // 读入航班数据
 
