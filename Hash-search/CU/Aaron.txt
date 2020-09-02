@@ -1,0 +1,8 @@
+uestc6	Chengdu2	2020-9-13-8-56	Chengdu	Guangzhou	7	100	96
+uestc2	Nagoya3	2020-9-29-20-32	Nagoya	Shenzhen	3	100	92
+uestc3	Sapporo27	2020-8-17-19-43	Sapporo	Yokohama	4	100	83
+uestc9	Kobe28	2020-10-7-9-9	Kobe	Xian	10	100	89
+uestc18	Nagoya33	2020-9-18-8-8	Nagoya	Beijing	9	100	88
+uestc0	Nagoya90	2020-9-29-8-20	Nagoya	Tokyo	1	100	80
+uestc8	Nagoya97	2020-9-6-8-8	Nagoya	Shanghai	9	100	88
+

@@ -1,0 +1,13 @@
+Arnold	1
+Arthur	1
+Brad	1
+Kevin	3
+Kyle	1
+Lance	1
+Larry	2
+Laurent	3
+Lawren	1
+Vernon	1
+Warner	3
+Wayne	1
+William	3

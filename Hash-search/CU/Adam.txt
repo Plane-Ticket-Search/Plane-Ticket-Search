@@ -1,0 +1,3 @@
+uestc9	Kobe28	2020-10-7-9-9	Kobe	Xian	10	100	89
+uestc5	Taibei29	2020-10-12-21-45	Taibei	Xiamen	6	100	85
+uestc18	Nagoya33	2020-9-18-8-8	Nagoya	Beijing	9	100	88

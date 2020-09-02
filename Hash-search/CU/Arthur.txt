@@ -1,0 +1,2 @@
+uestc13	Shanghai108	2020-8-4-19-43	Shanghai	Yokohama	4	100	83
+uestc47	Sapporo114	2020-8-23-19-7	Sapporo	Guangzhou	8	100	87

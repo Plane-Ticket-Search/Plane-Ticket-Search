@@ -1,0 +1,2 @@
+uestc17	Shanghai122	2020-8-17-19-7	Shanghai	Sapporo	8	100	87
+uestc15	Shanghai124	2020-8-2-19-55	Shanghai	Osaka	6	100	95
