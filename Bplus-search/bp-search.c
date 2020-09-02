@@ -227,7 +227,7 @@ static int _bptree_node_insert(struct BPTreeNode *node, struct BPTreeEntry *entr
   if (!node->is_leaf)
     entry->child->parent = node;
   // 增加size
-  node->size++;
+  node->size = node->size + 1;
   return 0;
 }
 
@@ -375,18 +375,32 @@ struct PlaneInfo *bptree_lookup(struct BPTree *const tree, char key[KEY_MAX_LEN]
   }
   // 找出叶子节点的索引
   int index = _bptree_node_find_pos(node, key1);
+  // printf("%s\t%s\t%d\t%d\n", node->entries[index].key, key1, key_cmp(node->entries[index].key, key1), index);
+
   // 如果在范围之内，就将叶子节点的值返回出去
-  if (index < node->size)
+  // printf("%d", node->size);
+  if (index <= node->size)
   {
     //    	printf("bptree_lookup_end\n");
-    if (index == 0 && key_cmp(node->entries[index].key, key1) != 0)
+    if ((index == 0) && (key_cmp(node->entries[index].key, key1) != 0))
     {
+      // printf("?\n");
       return NULL;
     }
-    return node->entries[index].value;
+    else if (key_cmp(node->entries[index].key, key1) == 0)
+    {
+      // printf("%s\t%s\t%d\t%d\n", node->entries[index].key, key1, key_cmp(node->entries[index].key, key1), index);
+      return node->entries[index].value;
+    }
+    else
+    {
+      // printf("???\n");
+      return NULL;
+    }
   }
   else
   {
+    // printf("?????\n");
     return NULL;
   }
 }
@@ -646,6 +660,7 @@ void insert_data(struct BPTree *const tree)
     //   /*确认修改*/
 
     // }
+    // printf("%s\n", res->fly_num);
     printf("数据已存在!\n");
   }
 }
