@@ -1,0 +1,2 @@
+uestc3	Sapporo27	2020-8-17-19-43	Sapporo	Yokohama	4	100	83
+uestc9	Kobe28	2020-10-7-9-9	Kobe	Xian	10	100	89

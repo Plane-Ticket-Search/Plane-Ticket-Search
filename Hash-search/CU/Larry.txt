@@ -1,0 +1,4 @@
+uestc13	Shanghai108	2020-8-4-19-43	Shanghai	Yokohama	4	100	83
+uestc43	Shenzhen111	2020-10-13-21-33	Shenzhen	Xian	4	100	93
+uestc47	Sapporo114	2020-8-23-19-7	Sapporo	Guangzhou	8	100	87
+uestc0	Nagoya90	2020-9-29-8-20	Nagoya	Tokyo	1	100	80

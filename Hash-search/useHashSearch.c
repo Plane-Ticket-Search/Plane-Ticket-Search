@@ -6,9 +6,10 @@ void useHashSearch()
    	inithashtable();
    	insert_hashtable();
 
-    while (true)
+    int flag = 1;
+    while (flag != 0)
     {
         menu();
-        keydown();
+        flag = keydown();
     }
 }

@@ -1,0 +1,5 @@
+uestc5	Taibei29	2020-10-12-21-45	Taibei	Xiamen	6	100	85
+uestc18	Nagoya33	2020-9-18-8-8	Nagoya	Beijing	9	100	88
+uestc12	Chengdu47	2020-9-17-20-32	Chengdu	Tokyo	3	100	92
+uestc1	Shanghai50	2020-8-2-19-31	Shanghai	Nagoya	2	100	91
+uestc0	Nagoya90	2020-9-29-8-20	Nagoya	Tokyo	1	100	80

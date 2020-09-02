@@ -1,0 +1,4 @@
+uestc0	Nagoya90	2020-9-29-8-20	Nagoya	Tokyo	1	100	80
+uestc35	Chongqing91	2020-8-6-7-55	Chongqing	Kobe	6	100	95
+uestc8	Nagoya97	2020-9-6-8-8	Nagoya	Shanghai	9	100	88
+uestc0	Nagoya90	2020-9-29-8-20	Nagoya	Tokyo	1	100	80

@@ -1,0 +1,2 @@
+uestc13	Shanghai108	2020-8-4-19-43	Shanghai	Yokohama	4	100	83
+uestc0	Nagoya90	2020-9-29-8-20	Nagoya	Tokyo	1	100	80

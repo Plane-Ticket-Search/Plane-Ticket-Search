@@ -1,0 +1,2 @@
+uestc42	Chengdu101	2020-9-12-8-32	Chengdu	Osaka	3	100	92
+uestc6	Chengdu103	2020-9-26-20-56	Chengdu	Tianjin	7	100	96
